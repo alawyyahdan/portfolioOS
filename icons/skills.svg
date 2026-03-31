@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Win95 pixel skills/gear icon -->
+  <rect width="32" height="32" fill="none"/>
+  <!-- Gear outer -->
+  <rect x="14" y="2"  width="4" height="4" fill="#808080"/>
+  <rect x="14" y="26" width="4" height="4" fill="#808080"/>
+  <rect x="2"  y="14" width="4" height="4" fill="#808080"/>
+  <rect x="26" y="14" width="4" height="4" fill="#808080"/>
+  <rect x="5"  y="5"  width="3" height="3" fill="#808080"/>
+  <rect x="24" y="5"  width="3" height="3" fill="#808080"/>
+  <rect x="5"  y="24" width="3" height="3" fill="#808080"/>
+  <rect x="24" y="24" width="3" height="3" fill="#808080"/>
+  <!-- Gear circle -->
+  <rect x="8"  y="6"  width="16" height="20" fill="#808080"/>
+  <rect x="6"  y="8"  width="20" height="16" fill="#808080"/>
+  <!-- Inner circle (hole) -->
+  <rect x="12" y="12" width="8"  height="8"  fill="#c0c0c0"/>
+  <rect x="11" y="13" width="10" height="6"  fill="#c0c0c0"/>
+  <rect x="13" y="11" width="6"  height="10" fill="#c0c0c0"/>
+  <!-- Highlight -->
+  <rect x="9"  y="7"  width="6"  height="2"  fill="#c0c0c0" opacity="0.5"/>
+</svg>

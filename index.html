@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Syahdan Hayyan Alawy — Portfolio OS</title>
+  <meta name="description" content="Syahdan Hayyan Alawy — Robotics &amp; AI Engineering student at Universitas Airlangga. Portfolio featuring embedded systems, ML, and robotics projects." />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon"   href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png" />
+  <link rel="apple-touch-icon"           href="icons/favicon-32.png" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════ MOBILE WALL ═══ -->
+  <div id="mobile-wall">
+    <div class="mobile-box">
+      <div class="mobile-flag">
+        <span style="background:#FF0000"></span>
+        <span style="background:#00FF00"></span>
+        <span style="background:#0000FF"></span>
+        <span style="background:#FFFF00"></span>
+      </div>
+      <h2>Portfolio<span class="m-os">OS</span></h2>
+      <div class="mobile-icon">🖥️</div>
+      <p class="mobile-msg">This experience is designed for<br/><strong>desktop browsers</strong>.</p>
+      <p class="mobile-sub">Please open this page on a laptop or desktop computer for the full Windows 95 experience.</p>
+      <div class="mobile-divider"></div>
+      <p class="mobile-tip">💡 Tip: Try rotating your device to landscape mode.</p>
+      <button id="mobile-continue" class="win95-btn">Continue Anyway →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ BOOT SCREEN ═══ -->
+  <div id="boot-screen">
+    <div class="boot-inner">
+      <div class="boot-logo">
+        <div class="boot-flag">
+          <span style="background:#FF0000"></span>
+          <span style="background:#00FF00"></span>
+          <span style="background:#0000FF"></span>
+          <span style="background:#FFFF00"></span>
+        </div>
+        <div class="boot-title">
+          <span class="boot-title-top">Microsoft</span>
+          <span class="boot-title-bottom">Windows<sup>®</sup> 95</span>
+        </div>
+      </div>
+      <p class="boot-subtitle">Starting Portfolio OS…</p>
+      <div class="boot-bar-wrap">
+        <div class="boot-bar" id="boot-bar"></div>
+      </div>
+      <p class="boot-copy">Copyright © 2025 Portfolio. All rights reserved.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ DESKTOP ═══════ -->
+  <div id="desktop" class="hidden">
+
+    <!-- Desktop Icons -->
+    <div class="desktop-icons">
+      <div class="desktop-icon" id="icon-about"    data-window="win-about"    tabindex="0" role="button" aria-label="Open About Me">
+        <img src="icons/user.svg"    alt=""/>
+        <span>About Me</span>
+      </div>
+      <div class="desktop-icon" id="icon-projects" data-window="win-projects" tabindex="0" role="button" aria-label="Open Projects">
+        <img src="icons/folder.svg"  alt=""/>
+        <span>Projects</span>
+      </div>
+      <div class="desktop-icon" id="icon-skills"   data-window="win-skills"   tabindex="0" role="button" aria-label="Open Skills">
+        <img src="icons/skills.svg"  alt=""/>
+        <span>Skills</span>
+      </div>
+      <div class="desktop-icon" id="icon-contact"  data-window="win-contact"  tabindex="0" role="button" aria-label="Open Contact">
+        <img src="icons/mail.svg"    alt=""/>
+        <span>Contact</span>
+      </div>
+      <div class="desktop-icon" id="icon-recycle"  tabindex="0" role="button" aria-label="Recycle Bin">
+        <img src="icons/recycle.svg" alt=""/>
+        <span>Recycle Bin</span>
+      </div>
+    </div>
+
+    <!-- ─── WINDOW: About ─── -->
+    <div class="win95-window" id="win-about" style="top:60px;left:80px;width:480px;height:360px;">
+      <div class="win-titlebar">
+        <div class="win-title-left">
+          <img src="icons/user.svg" class="win-icon" alt=""/>
+          <span>About Me</span>
+        </div>
+        <div class="win-controls">
+          <button class="win-btn btn-min"   aria-label="Minimize">_</button>
+          <button class="win-btn btn-max"   aria-label="Maximize">□</button>
+          <button class="win-btn btn-close" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-menubar">
+        <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+      </div>
+      <div class="win-content about-content">
+        <div class="about-avatar">
+          <img src="icons/profile.png" alt="Syahdan Hayyan Alawy" class="avatar-photo"/>
+        </div>
+        <div class="about-text">
+          <h1>Hi, I'm <span class="highlight">Syahdan Hayyan</span></h1>
+          <p class="tagline">Robotics &amp; AI Engineering @ Universitas Airlangga</p>
+          <hr class="win-hr"/>
+          <p>Engineering student passionate about embedded systems, machine learning, and automation. I build things at the intersection of hardware and software — from autonomous robots to AI-powered dashboards.</p>
+          <p>Experienced with ROS 2, Python, C/C++, computer vision, and IoT systems. Currently looking for new challenges in robotics and AI.</p>
+          <div class="about-stats">
+            <div class="stat-box"><span class="stat-num">8+</span><span class="stat-label">Projects</span></div>
+            <div class="stat-box"><span class="stat-num">3.12</span><span class="stat-label">GPA / 4.00</span></div>
+            <div class="stat-box"><span class="stat-num">'23</span><span class="stat-label">Batch</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="win-statusbar"><span>Ready</span></div>
+      <div class="resize-handle"></div>
+    </div>
+
+    <!-- ─── WINDOW: Projects ─── -->
+    <div class="win95-window" id="win-projects" style="top:60px;left:160px;width:560px;height:560px;" hidden>
+      <div class="win-titlebar">
+        <div class="win-title-left">
+          <img src="icons/folder.svg" class="win-icon" alt=""/>
+          <span>Projects</span>
+        </div>
+        <div class="win-controls">
+          <button class="win-btn btn-min"   aria-label="Minimize">_</button>
+          <button class="win-btn btn-max"   aria-label="Maximize">□</button>
+          <button class="win-btn btn-close" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-menubar">
+        <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+      </div>
+      <div class="win-content projects-content">
+        <div class="proj-toolbar">
+          <button class="proj-view-btn active" data-view="icons">⊞ Icons</button>
+          <button class="proj-view-btn" data-view="list">☰ List</button>
+        </div>
+        <div class="proj-grid" id="proj-grid">
+
+          <!-- ☀️ Solar Panel — has Visit button -->
+          <div class="proj-item"
+               data-info="Solar Panel Tracker &amp; Weather Detection (2025): ESP32 embedded firmware with MQTT communication. Web-based real-time monitoring of solar panel orientation and weather sensor data. ☀️"
+               data-url="https://your-solar-panel-project-url.com">
+            <img src="icons/folder.svg" alt=""/>
+            <span>Solar Panel</span>
+            <span class="proj-badge">⚡ IoT</span>
+          </div>
+
+          <!-- 📷 ESP32-CAM — has Visit button -->
+          <div class="proj-item"
+               data-info="ESP32-Cam Stream (2025): Multi-user streaming platform with secure API key authentication, real-time video streaming, and web-based device management. 📷"
+               data-url="https://your-esp32cam-project-url.com">
+            <img src="icons/skills.svg" alt=""/>
+            <span>ESP32-CAM</span>
+            <span class="proj-badge">📡 Stream</span>
+          </div>
+
+          <!-- 🤖 Pallet AMR Simulator -->
+          <div class="proj-item"
+               data-info="Pallet AMR Simulator (2025): Simulation of a pallet autonomous mobile robot with dual fork-lift in ROS 2 and Gazebo, including Nav2 navigation stack and custom fork manipulation controllers. 🤖">
+            <img src="icons/skills.svg" alt=""/>
+            <span>Pallet AMR</span>
+            <span class="proj-badge">🤖 ROS2</span>
+          </div>
+
+          <!-- 🚗 Lane Detection -->
+          <div class="proj-item"
+               data-info="Lane Detection for Autonomous Vehicle (2025): Real-time pipeline using Python and OpenCV — Canny edge detection, ROI masking, and Hough Transform to detect lane markings and infer driving direction. 🚗">
+            <img src="icons/folder.svg" alt=""/>
+            <span>Lane Detect</span>
+            <span class="proj-badge">👁️ CV</span>
+          </div>
+
+          <!-- 💸 Loan Prediction -->
+          <div class="proj-item"
+               data-info="Loan Default Prediction (2025): Built a prediction model using CatBoost + SHAP. Achieved best results and used SHAP to highlight main risk drivers like loan-to-income ratio and interest rate. 💸">
+            <img src="icons/user.svg" alt=""/>
+            <span>Loan Predict</span>
+            <span class="proj-badge">🧠 ML</span>
+          </div>
+
+          <!-- 💬 WhatsApp Bot -->
+          <div class="proj-item"
+               data-info="WhatsApp Chatbot (2024): Built a WhatsApp chatbot backend with Node.js + OpenAI API to automate Q&amp;A for a TikTok account. Deployed on VPS with session-based conversation context. 💬">
+            <img src="icons/mail.svg" alt=""/>
+            <span>WA Chatbot</span>
+            <span class="proj-badge">🤖 AI</span>
+          </div>
+
+          <!-- 🔢 7-Segment Counter -->
+          <div class="proj-item"
+               data-info="Up/Down Counter 7-Segment (2025): Real digital circuit with manual switch-controlled up/down counter using IC 555, 4017, 74LS147, and 4511 chips to drive a 7-segment display. 🔢">
+            <img src="icons/recycle.svg" alt=""/>
+            <span>7-Seg Counter</span>
+            <span class="proj-badge">🔌 Circuit</span>
+          </div>
+
+          <!-- 🚚 JM-BOT -->
+          <div class="proj-item"
+               data-info="JM-BOT Delivery Robot (2025): Autonomous line-following robot with color detection to read randomized orders and deliver ping-pong balls to the correct color-coded tables, then return to start. 🚚">
+            <img src="icons/folder.svg" alt=""/>
+            <span>JM-BOT</span>
+            <span class="proj-badge">🚀 Robot</span>
+          </div>
+          <!-- 🗺️ A* Algorithm — has Visit button -->
+          <div class="proj-item"
+               data-info="Implementation A-Star Algorithm for Shortest Path Ground Shipping Problem (2025): An interactive map simulation covering all cities in East Java, using the A* algorithm to find the shortest delivery route between cities. 🗺️"
+               data-url="https://astar-shortest-path.vercel.app">
+            <img src="icons/skills.svg" alt=""/>
+            <span>A* Pathfinder</span>
+            <span class="proj-badge">🗺️ AI</span>
+          </div>
+
+        </div>
+        <div class="proj-info-box" id="proj-info">
+          <span class="proj-hint">Double-click a project icon to view details…</span>
+        </div>
+        <div class="proj-visit-row" id="proj-visit-row" style="display:none;">
+          <a class="win95-btn proj-visit-btn" id="proj-visit-link" href="#" target="_blank" rel="noopener">🌐 Visit Project</a>
+        </div>
+      </div>
+      <div class="win-statusbar"><span id="proj-status">9 objects</span></div>
+      <div class="resize-handle"></div>
+    </div>
+
+    <!-- ─── WINDOW: Skills ─── -->
+    <div class="win95-window" id="win-skills" style="top:200px;left:160px;width:440px;height:380px;" hidden>
+      <div class="win-titlebar">
+        <div class="win-title-left">
+          <img src="icons/skills.svg" class="win-icon" alt=""/>
+          <span>Skills</span>
+        </div>
+        <div class="win-controls">
+          <button class="win-btn btn-min"   aria-label="Minimize">_</button>
+          <button class="win-btn btn-max"   aria-label="Maximize">□</button>
+          <button class="win-btn btn-close" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-menubar">
+        <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+      </div>
+      <div class="win-content skills-content">
+        <div class="skills-tabs">
+          <button class="tab-btn active" data-tab="languages">Languages</button>
+          <button class="tab-btn" data-tab="robotics">Robotics / AI</button>
+          <button class="tab-btn" data-tab="tools">Tools</button>
+        </div>
+        <div class="tab-panel active" id="tab-languages">
+          <div class="skill-row"><span class="skill-label">Python</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div><span class="skill-pct">85%</span></div>
+          <div class="skill-row"><span class="skill-label">C / C++</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div><span class="skill-pct">80%</span></div>
+          <div class="skill-row"><span class="skill-label">HTML / CSS</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div><span class="skill-pct">78%</span></div>
+          <div class="skill-row"><span class="skill-label">JavaScript</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:72%"></div></div><span class="skill-pct">72%</span></div>
+          <div class="skill-row"><span class="skill-label">React</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div><span class="skill-pct">65%</span></div>
+        </div>
+        <div class="tab-panel" id="tab-robotics">
+          <div class="skill-row"><span class="skill-label">ROS / ROS 2</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div><span class="skill-pct">80%</span></div>
+          <div class="skill-row"><span class="skill-label">Computer Vision</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div><span class="skill-pct">78%</span></div>
+          <div class="skill-row"><span class="skill-label">Machine Learning</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:72%"></div></div><span class="skill-pct">72%</span></div>
+          <div class="skill-row"><span class="skill-label">IoT / ESP32</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div><span class="skill-pct">82%</span></div>
+          <div class="skill-row"><span class="skill-label">Gazebo Sim</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div><span class="skill-pct">75%</span></div>
+        </div>
+        <div class="tab-panel" id="tab-tools">
+          <div class="skill-row"><span class="skill-label">Git / GitHub</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div><span class="skill-pct">85%</span></div>
+          <div class="skill-row"><span class="skill-label">OpenCV</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div><span class="skill-pct">78%</span></div>
+          <div class="skill-row"><span class="skill-label">Autodesk Inv.</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div><span class="skill-pct">70%</span></div>
+          <div class="skill-row"><span class="skill-label">Soldering</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div><span class="skill-pct">80%</span></div>
+          <div class="skill-row"><span class="skill-label">Cloud / VPS</span><div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div><span class="skill-pct">65%</span></div>
+        </div>
+      </div>
+      <div class="win-statusbar"><span>Skills loaded</span></div>
+      <div class="resize-handle"></div>
+    </div>
+
+    <!-- ─── WINDOW: Contact ─── -->
+    <div class="win95-window" id="win-contact" style="top:120px;left:320px;width:420px;height:400px;" hidden>
+      <div class="win-titlebar">
+        <div class="win-title-left">
+          <img src="icons/mail.svg" class="win-icon" alt=""/>
+          <span>Contact</span>
+        </div>
+        <div class="win-controls">
+          <button class="win-btn btn-min"   aria-label="Minimize">_</button>
+          <button class="win-btn btn-max"   aria-label="Maximize">□</button>
+          <button class="win-btn btn-close" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-menubar">
+        <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+      </div>
+      <div class="win-content contact-content">
+        <p class="contact-intro">📬 Send me a message!</p>
+        <div class="contact-form">
+          <div class="form-row">
+            <label for="c-name">Name:</label>
+            <input type="text" id="c-name" placeholder="Your name" autocomplete="off"/>
+          </div>
+          <div class="form-row">
+            <label for="c-email">Email:</label>
+            <input type="email" id="c-email" placeholder="you@example.com" autocomplete="off"/>
+          </div>
+          <div class="form-row">
+            <label for="c-subject">Subject:</label>
+            <input type="text" id="c-subject" placeholder="What's it about?" autocomplete="off"/>
+          </div>
+          <div class="form-row form-row--tall">
+            <label for="c-msg">Message:</label>
+            <textarea id="c-msg" placeholder="Type your message here…"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="win95-btn" id="btn-send">📤 Send</button>
+            <button class="win95-btn" id="btn-clear">🗑 Clear</button>
+          </div>
+        </div>
+        <div class="contact-links">
+          <a href="https://github.com/alawyyahdan" target="_blank" class="contact-chip" rel="noopener">🐙 GitHub</a>
+          <a href="https://www.linkedin.com/in/alawyyahdan" target="_blank" class="contact-chip" rel="noopener">💼 LinkedIn</a>
+          <a href="mailto:syahdan.hayyan.alawy-2023@ftmm.unair.ac.id" class="contact-chip">✉️ Email</a>
+        </div>
+      </div>
+      <div class="win-statusbar"><span>Ready to connect</span></div>
+      <div class="resize-handle"></div>
+    </div>
+
+    <!-- ─── WINDOW: Error (Easter Egg) ─── -->
+    <div class="win95-window win-error" id="win-error" style="top:30%;left:35%;width:380px;height:auto;" hidden>
+      <div class="win-titlebar">
+        <div class="win-title-left">
+          <span>☠️</span>
+          <span>Fatal Error</span>
+        </div>
+        <div class="win-controls">
+          <button class="win-btn btn-close" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-content error-content">
+        <div class="error-icon">⛔</div>
+        <div class="error-text">
+          <p><strong>STOP: 0x0000CAFE — AWESOMENESS_OVERFLOW</strong></p>
+          <p>This portfolio is too cool. A fatal exception has occurred in module SKILLS.DLL.</p>
+          <p>Press any key to continue or throw your computer out of a window.</p>
+        </div>
+      </div>
+      <div class="error-btns">
+        <button class="win95-btn" id="err-ok">OK</button>
+      </div>
+    </div>
+
+    <!-- ─── WINDOW: Send Success ─── -->
+    <div class="win95-window win-dialog" id="win-sent" style="top:35%;left:38%;width:320px;height:auto;" hidden>
+      <div class="win-titlebar">
+        <div class="win-title-left">
+          <span>✉️</span>
+          <span>Message Sent</span>
+        </div>
+        <div class="win-controls">
+          <button class="win-btn btn-close" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-content dialog-content">
+        <div class="dialog-icon">✅</div>
+        <p>Your message has been sent successfully!<br/>I'll get back to you soon.</p>
+      </div>
+      <div class="error-btns">
+        <button class="win95-btn" id="sent-ok">OK</button>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ TASKBAR ══════ -->
+    <div id="taskbar">
+      <button id="start-btn" aria-haspopup="true" aria-expanded="false">
+        <span class="start-logo">⊞</span>
+        <strong>Start</strong>
+      </button>
+
+      <div id="taskbar-items"></div>
+
+      <div id="taskbar-tray">
+        <div class="tray-icons">🔊 🖥️</div>
+        <div id="taskbar-clock"></div>
+      </div>
+    </div>
+
+    <!-- Start Menu -->
+    <div id="start-menu" class="hidden">
+      <div class="start-sidebar">
+        <span>Portfolio<span class="start-os">OS</span></span>
+      </div>
+      <ul class="start-list">
+        <li data-window="win-about">    <img src="icons/user.svg"    alt=""/> About Me</li>
+        <li data-window="win-projects"> <img src="icons/folder.svg"  alt=""/> Projects</li>
+        <li data-window="win-skills">   <img src="icons/skills.svg"  alt=""/> Skills</li>
+        <li data-window="win-contact">  <img src="icons/mail.svg"    alt=""/> Contact</li>
+        <li class="start-sep"></li>
+        <li id="start-error">           <span>⛔</span> Crash Test</li>
+        <li id="start-shutdown">        <span>🔴</span> Shut Down…</li>
+      </ul>
+    </div>
+
+  </div><!-- /desktop -->
+
+  <!-- Notification balloon -->
+  <div id="notif-balloon" class="hidden">
+    <strong>📬 New Message</strong><br/>
+    <span id="notif-text"></span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
