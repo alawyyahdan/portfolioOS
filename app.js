@@ -12,29 +12,39 @@
 
   let pct = 0;
   const steps = [
-    { target: 12, delay: 180 },
-    { target: 28, delay: 220 },
-    { target: 45, delay: 160 },
-    { target: 60, delay: 280 },
-    { target: 72, delay: 200 },
-    { target: 85, delay: 240 },
-    { target: 95, delay: 180 },
-    { target: 100, delay: 300 },
+    { target: 20, delay: 100 },
+    { target: 45, delay: 150 },
+    { target: 70, delay: 200 },
+    { target: 90, delay: 250 }
   ];
 
   let stepIdx = 0;
+  let isFinished = false;
+
+  function finishBoot() {
+    if (isFinished) return;
+    isFinished = true;
+    bar.style.width = '100%';
+    setTimeout(() => {
+      bootScreen.classList.add('fade-out');
+      desktop.classList.remove('hidden');
+      // Open About window by default after boot
+      setTimeout(() => openWindow('win-about'), 400);
+      setTimeout(() => showNotification('Welcome to Portfolio OS! Double-click any icon to open.'), 1200);
+      setTimeout(() => { bootScreen.style.display = 'none'; }, 900);
+    }, 400);
+  }
 
   function runStep() {
     if (stepIdx >= steps.length) {
-      // Boot done — reveal desktop
-      setTimeout(() => {
-        bootScreen.classList.add('fade-out');
-        desktop.classList.remove('hidden');
-        // Open About window by default after boot
-        setTimeout(() => openWindow('win-about'), 400);
-        setTimeout(() => showNotification('Welcome to Portfolio OS! Double-click any icon to open.'), 1200);
-        setTimeout(() => { bootScreen.style.display = 'none'; }, 900);
-      }, 300);
+      // WaitFor REAL loading
+      if (document.readyState === 'complete') {
+        finishBoot();
+      } else {
+        window.addEventListener('load', finishBoot);
+        // Fallback timeout in case some image hangs
+        setTimeout(finishBoot, 5000); 
+      }
       return;
     }
     const step = steps[stepIdx++];
@@ -43,7 +53,7 @@
     setTimeout(runStep, step.delay);
   }
 
-  setTimeout(runStep, 600);
+  setTimeout(runStep, 300);
 })();
 
 
@@ -246,28 +256,29 @@ function attachTitlebarDrag(win) {
 
   /* Touch */
   titlebar.addEventListener('touchstart', (e) => {
-    if (e.target.classList.contains('win-btn')) return;
+    if (e.target.closest('.win-btn')) return;
+    if (e.touches.length > 1) return; // ignore multi-touch
     const t = e.touches[0];
     dragStart(t.clientX, t.clientY);
-    e.preventDefault();
   }, { passive: false });
 
-  titlebar.addEventListener('touchmove', (e) => {
+  document.addEventListener('touchmove', (e) => {
+    if (!dragging) return;
     const t = e.touches[0];
     dragMove(t.clientX, t.clientY);
-    e.preventDefault();
+    e.preventDefault(); // Stop mobile browser from scrolling the page
   }, { passive: false });
 
-  titlebar.addEventListener('touchend', dragEnd);
+  document.addEventListener('touchend', dragEnd);
 
   /* Double-tap/click title to maximize */
   titlebar.addEventListener('dblclick', (e) => {
-    if (!e.target.classList.contains('win-btn')) maximizeWindow(win.id);
+    if (!e.target.closest('.win-btn')) maximizeWindow(win.id);
   });
 
   let lastTap = 0;
   titlebar.addEventListener('touchend', (e) => {
-    if (e.target.classList.contains('win-btn')) return;
+    if (e.target.closest('.win-btn')) return;
     const now = Date.now();
     if (now - lastTap < 350) maximizeWindow(win.id);
     lastTap = now;
@@ -305,18 +316,20 @@ function attachResize(win) {
 
   /* Touch */
   handle.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 1) return;
     const t = e.touches[0];
     resizeStart(t.clientX, t.clientY);
-    e.preventDefault(); e.stopPropagation();
+    e.stopPropagation();
   }, { passive: false });
 
-  handle.addEventListener('touchmove', (e) => {
+  document.addEventListener('touchmove', (e) => {
+    if (!resizing) return;
     const t = e.touches[0];
     resizeMove(t.clientX, t.clientY);
-    e.preventDefault();
+    e.preventDefault(); // Stop mobile browser scrolling
   }, { passive: false });
 
-  handle.addEventListener('touchend', () => { resizing = false; });
+  document.addEventListener('touchend', () => { resizing = false; });
 }
 
 
