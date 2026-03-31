@@ -7,18 +7,18 @@
 /* ──────────────────────────────── BOOT SEQUENCE ─────────────── */
 (function bootSequence() {
   const bootScreen = document.getElementById('boot-screen');
-  const bar        = document.getElementById('boot-bar');
-  const desktop    = document.getElementById('desktop');
+  const bar = document.getElementById('boot-bar');
+  const desktop = document.getElementById('desktop');
 
   let pct = 0;
   const steps = [
-    { target: 12,  delay: 180 },
-    { target: 28,  delay: 220 },
-    { target: 45,  delay: 160 },
-    { target: 60,  delay: 280 },
-    { target: 72,  delay: 200 },
-    { target: 85,  delay: 240 },
-    { target: 95,  delay: 180 },
+    { target: 12, delay: 180 },
+    { target: 28, delay: 220 },
+    { target: 45, delay: 160 },
+    { target: 60, delay: 280 },
+    { target: 72, delay: 200 },
+    { target: 85, delay: 240 },
+    { target: 95, delay: 180 },
     { target: 100, delay: 300 },
   ];
 
@@ -60,17 +60,17 @@ setInterval(updateClock, 5000);
 
 
 /* ──────────────────────────────── WINDOW MANAGER ─────────────── */
-const windows   = {};   // id → { el, minimized, maximized, prevRect }
+const windows = {};   // id → { el, minimized, maximized, prevRect }
 const taskbarEl = document.getElementById('taskbar-items');
-let   zCounter  = 20;
+let zCounter = 20;
 
 const WINDOW_META = {
-  'win-about':    { title: 'About Me',  icon: 'icons/user.svg'    },
-  'win-projects': { title: 'Projects',  icon: 'icons/folder.svg'  },
-  'win-skills':   { title: 'Skills',    icon: 'icons/skills.svg'  },
-  'win-contact':  { title: 'Contact',   icon: 'icons/mail.svg'    },
-  'win-error':    { title: 'Fatal Error', icon: null              },
-  'win-sent':     { title: 'Message Sent', icon: null             },
+  'win-about': { title: 'About Me', icon: 'icons/user.svg' },
+  'win-projects': { title: 'Projects', icon: 'icons/folder.svg' },
+  'win-skills': { title: 'Skills', icon: 'icons/skills.svg' },
+  'win-contact': { title: 'Contact', icon: 'icons/mail.svg' },
+  'win-error': { title: 'Fatal Error', icon: null },
+  'win-sent': { title: 'Message Sent', icon: null },
 };
 
 function registerWindow(id) {
@@ -142,9 +142,9 @@ function maximizeWindow(id) {
   } else {
     el.classList.remove('win-maximized');
     const r = meta.prevRect;
-    el.style.top    = r.top;
-    el.style.left   = r.left;
-    el.style.width  = r.width;
+    el.style.top = r.top;
+    el.style.left = r.left;
+    el.style.width = r.width;
     el.style.height = r.height;
     meta.maximized = false;
   }
@@ -162,8 +162,8 @@ function animateWindowOpen(el) {
 /* Controls (min/max/close) */
 function attachWindowControls(el, id) {
   el.querySelector('.btn-close')?.addEventListener('click', () => closeWindow(id));
-  el.querySelector('.btn-min')?.addEventListener('click',   () => minimizeWindow(id));
-  el.querySelector('.btn-max')?.addEventListener('click',   () => maximizeWindow(id));
+  el.querySelector('.btn-min')?.addEventListener('click', () => minimizeWindow(id));
+  el.querySelector('.btn-max')?.addEventListener('click', () => maximizeWindow(id));
   el.addEventListener('mousedown', () => focusWindow(id), true);
 }
 
@@ -171,10 +171,10 @@ function attachWindowControls(el, id) {
 /* ──────────────────────────────── TASKBAR ITEMS ─────────────── */
 function addTaskbarItem(id) {
   if (document.querySelector(`.taskbar-item[data-win="${id}"]`)) return;
-  const meta  = WINDOW_META[id] || { title: id, icon: null };
-  const item  = document.createElement('button');
-  item.className    = 'taskbar-item';
-  item.dataset.win  = id;
+  const meta = WINDOW_META[id] || { title: id, icon: null };
+  const item = document.createElement('button');
+  item.className = 'taskbar-item';
+  item.dataset.win = id;
   item.setAttribute('aria-label', 'Window: ' + meta.title);
   if (meta.icon) {
     const img = document.createElement('img');
@@ -214,7 +214,7 @@ function attachTitlebarDrag(win) {
     startX = e.clientX;
     startY = e.clientY;
     startL = parseInt(win.style.left) || 0;
-    startT = parseInt(win.style.top)  || 0;
+    startT = parseInt(win.style.top) || 0;
     win.classList.add('dragging');
     e.preventDefault();
   });
@@ -230,7 +230,7 @@ function attachTitlebarDrag(win) {
     newL = Math.max(-win.offsetWidth + 80, Math.min(window.innerWidth - 80, newL));
     newT = Math.max(0, Math.min(deskH - 30, newT));
     win.style.left = newL + 'px';
-    win.style.top  = newT + 'px';
+    win.style.top = newT + 'px';
   });
 
   document.addEventListener('mouseup', () => {
@@ -266,7 +266,7 @@ function attachResize(win) {
     if (!resizing) return;
     const newW = Math.max(200, startW + (e.clientX - startX));
     const newH = Math.max(120, startH + (e.clientY - startY));
-    win.style.width  = newW + 'px';
+    win.style.width = newW + 'px';
     win.style.height = newH + 'px';
   });
 
@@ -310,7 +310,7 @@ document.getElementById('desktop').addEventListener('click', (e) => {
 
 
 /* ──────────────────────────────── START MENU ─────────────── */
-const startBtn  = document.getElementById('start-btn');
+const startBtn = document.getElementById('start-btn');
 const startMenu = document.getElementById('start-menu');
 
 startBtn.addEventListener('click', (e) => {
@@ -349,13 +349,13 @@ document.getElementById('start-shutdown')?.addEventListener('click', () => {
   showShutdown();
 });
 
-document.getElementById('err-ok')?.addEventListener('click',  () => closeWindow('win-error'));
+document.getElementById('err-ok')?.addEventListener('click', () => closeWindow('win-error'));
 document.getElementById('sent-ok')?.addEventListener('click', () => closeWindow('win-sent'));
 
 
 /* ──────────────────────────────── PROJECTS ─────────────── */
-const projGrid  = document.getElementById('proj-grid');
-const projInfo  = document.getElementById('proj-info');
+const projGrid = document.getElementById('proj-grid');
+const projInfo = document.getElementById('proj-info');
 const projStatus = document.getElementById('proj-status');
 
 document.querySelectorAll('.proj-view-btn').forEach(btn => {
@@ -385,7 +385,7 @@ document.querySelectorAll('.proj-item').forEach(item => {
       // Show description
       projInfo.innerHTML = '📁 ' + item.dataset.info;
       // Show/hide Visit Project button
-      const visitRow  = document.getElementById('proj-visit-row');
+      const visitRow = document.getElementById('proj-visit-row');
       const visitLink = document.getElementById('proj-visit-link');
       if (item.dataset.url) {
         visitLink.href = item.dataset.url;
@@ -417,23 +417,62 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 
 
 /* ──────────────────────────────── CONTACT FORM ─────────────── */
-document.getElementById('btn-send')?.addEventListener('click', () => {
-  const name    = document.getElementById('c-name').value.trim();
-  const email   = document.getElementById('c-email').value.trim();
+/* ── GANTI INI dengan endpoint Formspree kamu ──────────────────── */
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mykbjwwj';
+/* ────────────────────────────────────────────────────────────────── */
+
+document.getElementById('btn-send')?.addEventListener('click', async () => {
+  const name = document.getElementById('c-name').value.trim();
+  const email = document.getElementById('c-email').value.trim();
+  const subject = document.getElementById('c-subject').value.trim();
   const message = document.getElementById('c-msg').value.trim();
+
   if (!name || !email || !message) {
     showAlert('Please fill in Name, Email, and Message.');
     return;
   }
-  openWindow('win-sent');
-  document.getElementById('c-name').value    = '';
-  document.getElementById('c-email').value   = '';
-  document.getElementById('c-subject').value = '';
-  document.getElementById('c-msg').value     = '';
+
+  // Basic email validation
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showAlert('Please enter a valid email address.');
+    return;
+  }
+
+  // Show sending state
+  const sendBtn = document.getElementById('btn-send');
+  const origText = sendBtn.textContent;
+  sendBtn.textContent = '⏳ Sending…';
+  sendBtn.disabled = true;
+
+  try {
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, subject, message, _replyto: email }),
+    });
+
+    if (res.ok) {
+      // Success — show Win95 dialog & clear form
+      openWindow('win-sent');
+      document.getElementById('c-name').value = '';
+      document.getElementById('c-email').value = '';
+      document.getElementById('c-subject').value = '';
+      document.getElementById('c-msg').value = '';
+    } else {
+      const data = await res.json().catch(() => ({}));
+      const errMsg = data?.errors?.map(e => e.message).join(', ') || 'Server error. Please try again.';
+      showAlert('Failed to send: ' + errMsg);
+    }
+  } catch (err) {
+    showAlert('Network error. Please check your connection and try again.');
+  } finally {
+    sendBtn.textContent = origText;
+    sendBtn.disabled = false;
+  }
 });
 
 document.getElementById('btn-clear')?.addEventListener('click', () => {
-  ['c-name','c-email','c-subject','c-msg'].forEach(id => {
+  ['c-name', 'c-email', 'c-subject', 'c-msg'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.value = '';
   });
@@ -462,8 +501,8 @@ function showAlert(msg) {
 /* ──────────────────────────────── SHUTDOWN ─────────────── */
 function showShutdown() {
   const bootScreen = document.getElementById('boot-screen');
-  const bar        = document.getElementById('boot-bar');
-  const desktop    = document.getElementById('desktop');
+  const bar = document.getElementById('boot-bar');
+  const desktop = document.getElementById('desktop');
 
   desktop.style.opacity = '0';
   desktop.style.transition = 'opacity 0.5s ease';
@@ -503,7 +542,7 @@ document.addEventListener('keydown', (e) => {
 /* ──────────────────────────────── MOBILE WALL ─────────────── */
 (function mobileWall() {
   const wall = document.getElementById('mobile-wall');
-  const btn  = document.getElementById('mobile-continue');
+  const btn = document.getElementById('mobile-continue');
   if (!wall || !btn) return;
 
   btn.addEventListener('click', () => {
