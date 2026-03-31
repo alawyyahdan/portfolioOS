@@ -88,32 +88,46 @@
   <!-- ═══════════════════════════════════════════ DESKTOP ═══════ -->
   <div id="desktop" class="hidden">
 
-    <!-- Desktop Icons -->
-    <div class="desktop-icons">
-      <div class="desktop-icon" id="icon-about" data-window="win-about" tabindex="0" role="button"
-        aria-label="Open About Me">
-        <img src="icons/user.svg" alt="" />
-        <span>About Me</span>
-      </div>
-      <div class="desktop-icon" id="icon-projects" data-window="win-projects" tabindex="0" role="button"
-        aria-label="Open Projects">
-        <img src="icons/folder.svg" alt="" />
-        <span>Projects</span>
-      </div>
-      <div class="desktop-icon" id="icon-skills" data-window="win-skills" tabindex="0" role="button"
-        aria-label="Open Skills">
-        <img src="icons/skills.svg" alt="" />
-        <span>Skills</span>
-      </div>
-      <div class="desktop-icon" id="icon-contact" data-window="win-contact" tabindex="0" role="button"
-        aria-label="Open Contact">
-        <img src="icons/mail.svg" alt="" />
-        <span>Contact</span>
-      </div>
-      <div class="desktop-icon" id="icon-recycle" tabindex="0" role="button" aria-label="Recycle Bin">
-        <img src="icons/recycle.svg" alt="" />
-        <span>Recycle Bin</span>
-      </div>
+    <!-- Desktop Icons — all freely draggable -->
+    <div class="desktop-icon icon-free" id="icon-about" data-window="win-about" tabindex="0" role="button"
+      aria-label="Open About Me" style="position:absolute;top:16px;left:16px;">
+      <img src="icons/user.svg" alt="" />
+      <span>About Me</span>
+    </div>
+    <div class="desktop-icon icon-free" id="icon-projects" data-window="win-projects" tabindex="0" role="button"
+      aria-label="Open Projects" style="position:absolute;top:110px;left:16px;">
+      <img src="icons/folder.svg" alt="" />
+      <span>Projects</span>
+    </div>
+    <div class="desktop-icon icon-free" id="icon-skills" data-window="win-skills" tabindex="0" role="button"
+      aria-label="Open Skills" style="position:absolute;top:204px;left:16px;">
+      <img src="icons/skills.svg" alt="" />
+      <span>Skills</span>
+    </div>
+    <div class="desktop-icon icon-free" id="icon-contact" data-window="win-contact" tabindex="0" role="button"
+      aria-label="Open Contact" style="position:absolute;top:298px;left:16px;">
+      <img src="icons/mail.svg" alt="" />
+      <span>Contact</span>
+    </div>
+    <div class="desktop-icon icon-free" id="icon-recycle" tabindex="0" role="button" aria-label="Recycle Bin"
+      style="position:absolute;top:392px;left:16px;">
+      <img src="icons/recycle.svg" alt="" />
+      <span>Recycle Bin</span>
+    </div>
+    <div class="desktop-icon icon-free" id="icon-notepad1" data-window="win-notepad1" tabindex="0" role="button"
+      aria-label="Open readme.txt" style="position:absolute;top:220px;left:106px;">
+      <img src="icons/notepad.svg" alt="" />
+      <span>readme.txt</span>
+    </div>
+    <div class="desktop-icon icon-free" id="icon-notepad2" data-window="win-notepad2" tabindex="0" role="button"
+      aria-label="Open notes.txt" style="position:absolute;top:360px;left:98px;">
+      <img src="icons/notepad.svg" alt="" />
+      <span>notes.txt</span>
+    </div>
+    <div class="desktop-icon icon-free" id="icon-notepad3" data-window="win-notepad3" tabindex="0" role="button"
+      aria-label="Open scratch.txt" style="position:absolute;top:130px;left:110px;">
+      <img src="icons/notepad.svg" alt="" />
+      <span>scratch.txt</span>
     </div>
 
     <!-- ─── WINDOW: About ─── -->
@@ -468,6 +482,124 @@
       </div>
     </div>
 
+    <!-- ─── WINDOW: Notepad 1 (READ ONLY) ─── -->
+    <div class="win95-window" id="win-notepad1" style="top:80px;left:100px;width:460px;height:320px;" hidden>
+      <div class="win-titlebar">
+        <div class="win-title-left">
+          <img src="icons/notepad.svg" class="win-icon" alt="" />
+          <span>readme.txt [Read Only]</span>
+        </div>
+        <div class="win-controls">
+          <button class="win-btn btn-min" aria-label="Minimize">_</button>
+          <button class="win-btn btn-max" aria-label="Maximize">□</button>
+          <button class="win-btn btn-close" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-menubar notepad-menubar">
+        <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+      </div>
+      <div class="win-content notepad-content">
+        <textarea id="notepad1-area" class="notepad-area notepad-readonly" readonly spellcheck="false">stay hungry. stay foolish.
+
+the difference between ordinary and extraordinary
+is just that little extra you put in every day.
+
+it doesn't matter how slowly you go,
+as long as you don't stop.
+
+you don't have to be great to start,
+but you have to start to be great.
+
+build things. break things. learn everything.
+
+every expert was once a beginner.
+consistency beats talent when talent doesn't work hard.
+
+code is poetry written in logic. write it well.
+
+the best time to start was yesterday.
+the second best time is right now.</textarea>
+      </div>
+      <div class="win-statusbar notepad-statusbar">
+        <span>Read Only</span>
+        <span id="notepad1-words">0 words</span>
+      </div>
+      <div class="resize-handle"></div>
+    </div>
+
+    <!-- ─── WINDOW: Notepad 2 (READ ONLY) ─── -->
+    <div class="win95-window" id="win-notepad2" style="top:130px;left:180px;width:460px;height:320px;" hidden>
+      <div class="win-titlebar">
+        <div class="win-title-left">
+          <img src="icons/notepad.svg" class="win-icon" alt="" />
+          <span>notes.txt [Read Only]</span>
+        </div>
+        <div class="win-controls">
+          <button class="win-btn btn-min" aria-label="Minimize">_</button>
+          <button class="win-btn btn-max" aria-label="Maximize">□</button>
+          <button class="win-btn btn-close" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-menubar notepad-menubar">
+        <span>File</span><span>Edit</span><span>View</span><span>Help</span>
+      </div>
+      <div class="win-content notepad-content">
+        <textarea id="notepad2-area" class="notepad-area notepad-readonly" readonly spellcheck="false">// setting up the broker again... don't touch this
+
+host        : mqtt.bica.ca
+tcp port    : 1900
+websocket   : wss.bica.ca/mqtt
+
+// finally got the wss path working, no port needed
+// clients on web should use the wss endpoint
+// tcp for embedded stuff (esp32, etc)
+
+auth        : yes, don't skip this
+keepalive   : 60s
+qos         : 0 or 1 should be fine
+
+// topic structure i'm thinking:
+//   device/{id}/telemetry
+//   device/{id}/command
+//   device/{id}/status
+
+// TODO: test reconnect behavior on bad network
+// TODO: add tls cert renewal reminder</textarea>
+      </div>
+      <div class="win-statusbar notepad-statusbar">
+        <span>Read Only</span>
+        <span id="notepad2-words">0 words</span>
+      </div>
+      <div class="resize-handle"></div>
+    </div>
+
+    <!-- ─── WINDOW: Notepad 3 (EDITABLE) ─── -->
+    <div class="win95-window" id="win-notepad3" style="top:160px;left:260px;width:460px;height:340px;" hidden>
+      <div class="win-titlebar">
+        <div class="win-title-left">
+          <img src="icons/notepad.svg" class="win-icon" alt="" />
+          <span id="notepad3-title">scratch.txt — Notepad</span>
+        </div>
+        <div class="win-controls">
+          <button class="win-btn btn-min" aria-label="Minimize">_</button>
+          <button class="win-btn btn-max" aria-label="Maximize">□</button>
+          <button class="win-btn btn-close" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-menubar notepad-menubar">
+        <span>File</span><span>Edit</span><span>Format</span><span>View</span><span>Help</span>
+      </div>
+      <div class="win-content notepad-content">
+        <textarea id="notepad3-area" class="notepad-area" spellcheck="false"
+          placeholder="Type anything here..."></textarea>
+      </div>
+      <div class="win-statusbar notepad-statusbar">
+        <span id="notepad3-status">Ln 1, Col 1</span>
+        <span id="notepad3-words">0 words</span>
+      </div>
+      <div class="resize-handle"></div>
+    </div>
+
     <!-- ═══════════════════════════════════════════ TASKBAR ══════ -->
     <div id="taskbar">
       <button id="start-btn" aria-haspopup="true" aria-expanded="false">
@@ -493,6 +625,9 @@
         <li data-window="win-projects"> <img src="icons/folder.svg" alt="" /> Projects</li>
         <li data-window="win-skills"> <img src="icons/skills.svg" alt="" /> Skills</li>
         <li data-window="win-contact"> <img src="icons/mail.svg" alt="" /> Contact</li>
+        <li data-window="win-notepad1"> <span>📝</span> readme.txt</li>
+        <li data-window="win-notepad2"> <span>📝</span> notes.txt</li>
+        <li data-window="win-notepad3"> <span>📝</span> scratch.txt</li>
         <li class="start-sep"></li>
         <li id="start-error"> <span>⛔</span> Crash Test</li>
         <li id="start-shutdown"> <span>🔴</span> Shut Down…</li>

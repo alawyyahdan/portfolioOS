@@ -75,12 +75,15 @@ const taskbarEl = document.getElementById('taskbar-items');
 let zCounter = 20;
 
 const WINDOW_META = {
-  'win-about': { title: 'About Me', icon: 'icons/user.svg' },
-  'win-projects': { title: 'Projects', icon: 'icons/folder.svg' },
-  'win-skills': { title: 'Skills', icon: 'icons/skills.svg' },
-  'win-contact': { title: 'Contact', icon: 'icons/mail.svg' },
-  'win-error': { title: 'Fatal Error', icon: null },
-  'win-sent': { title: 'Message Sent', icon: null },
+  'win-about':    { title: 'About Me',     icon: 'icons/user.svg'   },
+  'win-projects': { title: 'Projects',     icon: 'icons/folder.svg' },
+  'win-skills':   { title: 'Skills',       icon: 'icons/skills.svg' },
+  'win-contact':  { title: 'Contact',      icon: 'icons/mail.svg'   },
+  'win-notepad1': { title: 'readme.txt',  icon: null               },
+  'win-notepad2': { title: 'notes.txt',   icon: null               },
+  'win-notepad3': { title: 'scratch.txt', icon: null               },
+  'win-error':    { title: 'Fatal Error', icon: null               },
+  'win-sent':     { title: 'Message Sent',icon: null               },
 };
 
 function registerWindow(id) {
@@ -333,34 +336,91 @@ function attachResize(win) {
 }
 
 
-/* ──────────────────────────────── DESKTOP ICONS ─────────────── */
-document.querySelectorAll('.desktop-icon[data-window]').forEach(icon => {
-  let clicks = 0, clickTimer;
-  const open = () => {
-    const winId = icon.dataset.window;
-    openWindow(winId);
-  };
-  icon.addEventListener('click', () => {
-    clicks++;
-    if (clicks === 1) {
-      clickTimer = setTimeout(() => { clicks = 0; }, 400);
-    } else {
-      clearTimeout(clickTimer);
-      clicks = 0;
-      open();
+/* ──────────────────────────────── DESKTOP ICONS (drag + click) ── */
+document.querySelectorAll('.desktop-icon').forEach(icon => {
+  let dragging = false, moved = false;
+  let startX, startY, startL, startT;
+  let clickCount = 0, clickTimer;
+
+  function activate() {
+    if (icon.dataset.window) openWindow(icon.dataset.window);
+  }
+
+  function dragStart(cx, cy) {
+    dragging = true; moved = false;
+    startX = cx; startY = cy;
+    startL = parseInt(icon.style.left) || 0;
+    startT = parseInt(icon.style.top)  || 0;
+    icon.style.zIndex = 50;
+  }
+
+  function dragMove(cx, cy) {
+    if (!dragging) return;
+    if (Math.abs(cx - startX) > 4 || Math.abs(cy - startY) > 4) moved = true;
+    if (!moved) return; // don't reposition until clearly dragging
+    const deskH = window.innerHeight - 40;
+    icon.style.left = Math.max(0, Math.min(window.innerWidth  - icon.offsetWidth,  startL + cx - startX)) + 'px';
+    icon.style.top  = Math.max(0, Math.min(deskH - icon.offsetHeight, startT + cy - startY)) + 'px';
+  }
+
+  function dragEnd() {
+    if (!dragging) return;
+    dragging = false;
+    icon.style.zIndex = '';
+
+    if (!moved) {
+      // Treat as click: single = select, double = open
+      document.querySelectorAll('.desktop-icon').forEach(i => i.classList.remove('selected'));
+      icon.classList.add('selected');
+      clickCount++;
+      if (clickCount === 1) {
+        clickTimer = setTimeout(() => { clickCount = 0; }, 400);
+      } else {
+        clearTimeout(clickTimer);
+        clickCount = 0;
+        activate();
+      }
+    }
+  }
+
+  // Mouse
+  icon.addEventListener('mousedown', e => {
+    dragStart(e.clientX, e.clientY);
+    e.stopPropagation();
+  });
+  document.addEventListener('mousemove', e => dragMove(e.clientX, e.clientY));
+  document.addEventListener('mouseup',   dragEnd);
+
+  // Touch — tap to select/open, drag to move
+  let lastTap = 0;
+  icon.addEventListener('touchstart', e => {
+    const t = e.touches[0];
+    dragStart(t.clientX, t.clientY);
+    e.stopPropagation();
+  }, { passive: true });
+
+  icon.addEventListener('touchmove', e => {
+    const t = e.touches[0];
+    dragMove(t.clientX, t.clientY);
+    if (moved) e.preventDefault();
+  }, { passive: false });
+
+  icon.addEventListener('touchend', e => {
+    dragEnd();
+    if (!moved) {
+      const now = Date.now();
+      if (now - lastTap < 400) activate();
+      lastTap = now;
     }
   });
-  icon.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-  });
-  // Single click = select
-  icon.addEventListener('click', () => {
-    document.querySelectorAll('.desktop-icon').forEach(i => i.classList.remove('selected'));
-    icon.classList.add('selected');
+
+  // Keyboard
+  icon.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
   });
 });
 
-// Deselect icons on desktop click
+// Deselect on bare desktop click
 document.getElementById('desktop').addEventListener('click', (e) => {
   if (!e.target.closest('.desktop-icon') && !e.target.closest('.win95-window') && !e.target.closest('#taskbar') && !e.target.closest('#start-menu')) {
     document.querySelectorAll('.desktop-icon').forEach(i => i.classList.remove('selected'));
@@ -617,4 +677,49 @@ document.addEventListener('keydown', (e) => {
       wall.classList.remove('dismissed');
     }
   });
+})();
+
+
+/* ──────────────────────────────── NOTEPAD ─────────────── */
+(function initNotepads() {
+  // Readonly pads — just compute word count when content is set
+  ['notepad1-area', 'notepad2-area'].forEach(id => {
+    const area  = document.getElementById(id);
+    const words = document.getElementById(id.replace('-area', '-words'));
+    if (!area || !words) return;
+    const count = () => {
+      const w = area.value.trim() === '' ? 0 : area.value.trim().split(/\s+/).length;
+      words.textContent = `${w} word${w !== 1 ? 's' : ''}`;
+    };
+    count();
+    new MutationObserver(count).observe(area, { characterData: true, subtree: true });
+  });
+
+  // Editable pad — full status tracking
+  const area   = document.getElementById('notepad3-area');
+  const status = document.getElementById('notepad3-status');
+  const words  = document.getElementById('notepad3-words');
+  const title  = document.getElementById('notepad3-title');
+  if (!area) return;
+
+  let dirty = false;
+  function updateStatus() {
+    const text = area.value.substring(0, area.selectionStart);
+    const ln   = text.split('\n').length;
+    const col  = text.split('\n').pop().length + 1;
+    if (status) status.textContent = `Ln ${ln}, Col ${col}`;
+    const w = area.value.trim() === '' ? 0 : area.value.trim().split(/\s+/).length;
+    if (words) words.textContent = `${w} word${w !== 1 ? 's' : ''}`;
+    if (!dirty && area.value.length > 0) {
+      dirty = true;
+      if (title) title.textContent = `*scratch.txt \u2014 Notepad`;
+    } else if (area.value.length === 0) {
+      dirty = false;
+      if (title) title.textContent = `scratch.txt \u2014 Notepad`;
+    }
+  }
+  area.addEventListener('input', updateStatus);
+  area.addEventListener('keyup', updateStatus);
+  area.addEventListener('click', updateStatus);
+  area.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === 'a') e.stopPropagation(); });
 })();
