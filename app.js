@@ -200,77 +200,123 @@ function removeTaskbarItem(id) {
 }
 
 
-/* ──────────────────────────────── DRAG ─────────────── */
+/* ──────────────────────────────── DRAG (mouse + touch) ─────── */
 function attachTitlebarDrag(win) {
   const titlebar = win.querySelector('.win-titlebar');
   if (!titlebar) return;
 
   let startX, startY, startL, startT, dragging = false;
 
-  titlebar.addEventListener('mousedown', (e) => {
-    if (e.target.classList.contains('win-btn')) return;
+  function dragStart(clientX, clientY) {
     if (windows[win.id]?.maximized) return;
     dragging = true;
-    startX = e.clientX;
-    startY = e.clientY;
+    startX = clientX;
+    startY = clientY;
     startL = parseInt(win.style.left) || 0;
-    startT = parseInt(win.style.top) || 0;
+    startT = parseInt(win.style.top)  || 0;
     win.classList.add('dragging');
-    e.preventDefault();
-  });
+  }
 
-  document.addEventListener('mousemove', (e) => {
+  function dragMove(clientX, clientY) {
     if (!dragging) return;
-    const dx = e.clientX - startX;
-    const dy = e.clientY - startY;
-    let newL = startL + dx;
-    let newT = startT + dy;
-    // Clamp within desktop
+    let newL = startL + (clientX - startX);
+    let newT = startT + (clientY - startY);
     const deskH = window.innerHeight - 40;
     newL = Math.max(-win.offsetWidth + 80, Math.min(window.innerWidth - 80, newL));
     newT = Math.max(0, Math.min(deskH - 30, newT));
     win.style.left = newL + 'px';
-    win.style.top = newT + 'px';
-  });
+    win.style.top  = newT + 'px';
+  }
 
-  document.addEventListener('mouseup', () => {
+  function dragEnd() {
     if (dragging) {
       dragging = false;
       win.classList.remove('dragging');
     }
-  });
+  }
 
-  // Double-click title to maximize
+  /* Mouse */
+  titlebar.addEventListener('mousedown', (e) => {
+    if (e.target.classList.contains('win-btn')) return;
+    dragStart(e.clientX, e.clientY);
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', (e) => dragMove(e.clientX, e.clientY));
+  document.addEventListener('mouseup',   dragEnd);
+
+  /* Touch */
+  titlebar.addEventListener('touchstart', (e) => {
+    if (e.target.classList.contains('win-btn')) return;
+    const t = e.touches[0];
+    dragStart(t.clientX, t.clientY);
+    e.preventDefault();
+  }, { passive: false });
+
+  titlebar.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    dragMove(t.clientX, t.clientY);
+    e.preventDefault();
+  }, { passive: false });
+
+  titlebar.addEventListener('touchend', dragEnd);
+
+  /* Double-tap/click title to maximize */
   titlebar.addEventListener('dblclick', (e) => {
     if (!e.target.classList.contains('win-btn')) maximizeWindow(win.id);
+  });
+
+  let lastTap = 0;
+  titlebar.addEventListener('touchend', (e) => {
+    if (e.target.classList.contains('win-btn')) return;
+    const now = Date.now();
+    if (now - lastTap < 350) maximizeWindow(win.id);
+    lastTap = now;
   });
 }
 
 
-/* ──────────────────────────────── RESIZE ─────────────── */
+/* ──────────────────────────────── RESIZE (mouse + touch) ────── */
 function attachResize(win) {
   const handle = win.querySelector('.resize-handle');
   if (!handle) return;
 
   let resizing = false, startX, startY, startW, startH;
 
-  handle.addEventListener('mousedown', (e) => {
+  function resizeStart(clientX, clientY) {
     if (windows[win.id]?.maximized) return;
     resizing = true;
-    startX = e.clientX; startY = e.clientY;
+    startX = clientX; startY = clientY;
     startW = win.offsetWidth; startH = win.offsetHeight;
+  }
+
+  function resizeMove(clientX, clientY) {
+    if (!resizing) return;
+    win.style.width  = Math.max(200, startW + (clientX - startX)) + 'px';
+    win.style.height = Math.max(120, startH + (clientY - startY)) + 'px';
+  }
+
+  /* Mouse */
+  handle.addEventListener('mousedown', (e) => {
+    resizeStart(e.clientX, e.clientY);
     e.preventDefault(); e.stopPropagation();
   });
+  document.addEventListener('mousemove', (e) => resizeMove(e.clientX, e.clientY));
+  document.addEventListener('mouseup',   () => { resizing = false; });
 
-  document.addEventListener('mousemove', (e) => {
-    if (!resizing) return;
-    const newW = Math.max(200, startW + (e.clientX - startX));
-    const newH = Math.max(120, startH + (e.clientY - startY));
-    win.style.width = newW + 'px';
-    win.style.height = newH + 'px';
-  });
+  /* Touch */
+  handle.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    resizeStart(t.clientX, t.clientY);
+    e.preventDefault(); e.stopPropagation();
+  }, { passive: false });
 
-  document.addEventListener('mouseup', () => { resizing = false; });
+  handle.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    resizeMove(t.clientX, t.clientY);
+    e.preventDefault();
+  }, { passive: false });
+
+  handle.addEventListener('touchend', () => { resizing = false; });
 }
 
 
