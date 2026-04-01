@@ -1,0 +1,10 @@
+<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cloud on top -->
+  <path d="M13 11a4 4 0 0 1 4-4 5 5 0 0 1 8.5 2 4 4 0 0 1-.5 7H9a4 4 0 0 1 4-5z" fill="#FFF" stroke="#000" stroke-width="1.5"/>
+  <!-- Connection line -->
+  <path d="M16 13v5" stroke="#000" stroke-width="1.5"/>
+  <!-- Hard Disk body -->
+  <rect x="4" y="17" width="24" height="11" fill="#C0C0C0" stroke="#000" stroke-width="1.5"/>
+  <rect x="6" y="20" width="14" height="2" fill="#808080" stroke="none" />
+  <circle cx="24" cy="22.5" r="1.5" fill="#00FF00"/>
+</svg>

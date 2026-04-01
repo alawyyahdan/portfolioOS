@@ -1361,3 +1361,59 @@ body {
 .icon-free:active {
   cursor: grabbing;
 }
+
+/* ══════════════════════════════ EXPLORER WINDOW ═══════════════ */
+.explorer-content {
+  background: var(--white);
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 16px;
+  padding: 16px;
+  overflow-y: auto;
+  border-top: 2px solid var(--btn-sh);
+  border-left: 2px solid var(--btn-sh);
+  border-right: 2px solid var(--btn-hi);
+  border-bottom: 2px solid var(--btn-hi);
+}
+
+.explorer-item {
+  width: 86px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  padding: 4px;
+  border: 1px solid transparent;
+}
+
+.explorer-item img {
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+}
+
+.explorer-item span {
+  font-family: var(--font-sys);
+  font-size: 13px;
+  line-height: 1.2;
+  text-align: center;
+  word-break: break-word;
+  color: #000;
+  pointer-events: none;
+  background: transparent;
+  padding: 1px 3px;
+}
+
+.explorer-item:hover {
+  background: rgba(0, 0, 128, 0.1);
+  border: 1px dashed var(--accent);
+}
+
+.explorer-item:focus,
+.explorer-item.selected {
+  outline: none;
+  background: rgba(0, 0, 128, 0.2);
+  border: 1px dotted var(--accent);
+}

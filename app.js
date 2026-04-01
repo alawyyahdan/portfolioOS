@@ -43,7 +43,7 @@
       } else {
         window.addEventListener('load', finishBoot);
         // Fallback timeout in case some image hangs
-        setTimeout(finishBoot, 5000); 
+        setTimeout(finishBoot, 5000);
       }
       return;
     }
@@ -75,15 +75,17 @@ const taskbarEl = document.getElementById('taskbar-items');
 let zCounter = 20;
 
 const WINDOW_META = {
-  'win-about':    { title: 'About Me',     icon: 'icons/user.svg'   },
-  'win-projects': { title: 'Projects',     icon: 'icons/folder.svg' },
-  'win-skills':   { title: 'Skills',       icon: 'icons/skills.svg' },
-  'win-contact':  { title: 'Contact',      icon: 'icons/mail.svg'   },
-  'win-notepad1': { title: 'readme.txt',  icon: null               },
-  'win-notepad2': { title: 'notes.txt',   icon: null               },
-  'win-notepad3': { title: 'scratch.txt', icon: null               },
-  'win-error':    { title: 'Fatal Error', icon: null               },
-  'win-sent':     { title: 'Message Sent',icon: null               },
+  'win-about': { title: 'About Me', icon: 'icons/user.svg' },
+  'win-projects': { title: 'Projects', icon: 'icons/folder.svg' },
+  'win-skills': { title: 'Skills', icon: 'icons/skills.svg' },
+  'win-contact': { title: 'Contact', icon: 'icons/mail.svg' },
+  'win-explorer': { title: 'Documents', icon: 'icons/folder.svg' },
+  'win-redirect-warning': { title: 'Warning', icon: null },
+  'win-notepad1': { title: 'readme.txt', icon: null },
+  'win-notepad2': { title: 'notes.txt', icon: null },
+  'win-notepad3': { title: 'scratch.txt', icon: null },
+  'win-error': { title: 'Fatal Error', icon: null },
+  'win-sent': { title: 'Message Sent', icon: null },
 };
 
 function registerWindow(id) {
@@ -226,7 +228,7 @@ function attachTitlebarDrag(win) {
     startX = clientX;
     startY = clientY;
     startL = parseInt(win.style.left) || 0;
-    startT = parseInt(win.style.top)  || 0;
+    startT = parseInt(win.style.top) || 0;
     win.classList.add('dragging');
   }
 
@@ -238,7 +240,7 @@ function attachTitlebarDrag(win) {
     newL = Math.max(-win.offsetWidth + 80, Math.min(window.innerWidth - 80, newL));
     newT = Math.max(0, Math.min(deskH - 30, newT));
     win.style.left = newL + 'px';
-    win.style.top  = newT + 'px';
+    win.style.top = newT + 'px';
   }
 
   function dragEnd() {
@@ -255,7 +257,7 @@ function attachTitlebarDrag(win) {
     e.preventDefault();
   });
   document.addEventListener('mousemove', (e) => dragMove(e.clientX, e.clientY));
-  document.addEventListener('mouseup',   dragEnd);
+  document.addEventListener('mouseup', dragEnd);
 
   /* Touch */
   titlebar.addEventListener('touchstart', (e) => {
@@ -305,7 +307,7 @@ function attachResize(win) {
 
   function resizeMove(clientX, clientY) {
     if (!resizing) return;
-    win.style.width  = Math.max(200, startW + (clientX - startX)) + 'px';
+    win.style.width = Math.max(200, startW + (clientX - startX)) + 'px';
     win.style.height = Math.max(120, startH + (clientY - startY)) + 'px';
   }
 
@@ -315,7 +317,7 @@ function attachResize(win) {
     e.preventDefault(); e.stopPropagation();
   });
   document.addEventListener('mousemove', (e) => resizeMove(e.clientX, e.clientY));
-  document.addEventListener('mouseup',   () => { resizing = false; });
+  document.addEventListener('mouseup', () => { resizing = false; });
 
   /* Touch */
   handle.addEventListener('touchstart', (e) => {
@@ -350,7 +352,7 @@ document.querySelectorAll('.desktop-icon').forEach(icon => {
     dragging = true; moved = false;
     startX = cx; startY = cy;
     startL = parseInt(icon.style.left) || 0;
-    startT = parseInt(icon.style.top)  || 0;
+    startT = parseInt(icon.style.top) || 0;
     icon.style.zIndex = 50;
   }
 
@@ -359,8 +361,8 @@ document.querySelectorAll('.desktop-icon').forEach(icon => {
     if (Math.abs(cx - startX) > 4 || Math.abs(cy - startY) > 4) moved = true;
     if (!moved) return; // don't reposition until clearly dragging
     const deskH = window.innerHeight - 40;
-    icon.style.left = Math.max(0, Math.min(window.innerWidth  - icon.offsetWidth,  startL + cx - startX)) + 'px';
-    icon.style.top  = Math.max(0, Math.min(deskH - icon.offsetHeight, startT + cy - startY)) + 'px';
+    icon.style.left = Math.max(0, Math.min(window.innerWidth - icon.offsetWidth, startL + cx - startX)) + 'px';
+    icon.style.top = Math.max(0, Math.min(deskH - icon.offsetHeight, startT + cy - startY)) + 'px';
   }
 
   function dragEnd() {
@@ -389,7 +391,7 @@ document.querySelectorAll('.desktop-icon').forEach(icon => {
     e.stopPropagation();
   });
   document.addEventListener('mousemove', e => dragMove(e.clientX, e.clientY));
-  document.addEventListener('mouseup',   dragEnd);
+  document.addEventListener('mouseup', dragEnd);
 
   // Touch — tap to select/open, drag to move
   let lastTap = 0;
@@ -684,7 +686,7 @@ document.addEventListener('keydown', (e) => {
 (function initNotepads() {
   // Readonly pads — just compute word count when content is set
   ['notepad1-area', 'notepad2-area'].forEach(id => {
-    const area  = document.getElementById(id);
+    const area = document.getElementById(id);
     const words = document.getElementById(id.replace('-area', '-words'));
     if (!area || !words) return;
     const count = () => {
@@ -696,17 +698,17 @@ document.addEventListener('keydown', (e) => {
   });
 
   // Editable pad — full status tracking
-  const area   = document.getElementById('notepad3-area');
+  const area = document.getElementById('notepad3-area');
   const status = document.getElementById('notepad3-status');
-  const words  = document.getElementById('notepad3-words');
-  const title  = document.getElementById('notepad3-title');
+  const words = document.getElementById('notepad3-words');
+  const title = document.getElementById('notepad3-title');
   if (!area) return;
 
   let dirty = false;
   function updateStatus() {
     const text = area.value.substring(0, area.selectionStart);
-    const ln   = text.split('\n').length;
-    const col  = text.split('\n').pop().length + 1;
+    const ln = text.split('\n').length;
+    const col = text.split('\n').pop().length + 1;
     if (status) status.textContent = `Ln ${ln}, Col ${col}`;
     const w = area.value.trim() === '' ? 0 : area.value.trim().split(/\s+/).length;
     if (words) words.textContent = `${w} word${w !== 1 ? 's' : ''}`;
@@ -722,4 +724,129 @@ document.addEventListener('keydown', (e) => {
   area.addEventListener('keyup', updateStatus);
   area.addEventListener('click', updateStatus);
   area.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === 'a') e.stopPropagation(); });
+})();
+
+
+/* ──────────────────────────────── EXPLORER & PDF ─────────────── */
+// ADD YOUR PDF LINKS HERE!
+// Note: if your server forces download (like drive.bica.ca api usually does),
+// the browser will download it automatically. We use Google Docs Viewer to force it to show up.
+const MY_PDFS = [
+  { name: "MLT_Akhir_5.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%205/ML%20Teo/MLT_Akhir_5.docx.pdf", forceViewer: true },
+  { name: "Project_Akhir_Computer_Vision_Kelompok_8.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%205/Comvis/Project%20Akhir%20Computer%20Vision%20Kelompok%208.pdf", forceViewer: true },
+  { name: "Implementation_of_A-Star_Algorithm_for_Shortest_Path_Logistic_Problem.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%204/AI/AI%20TUGAS%20AKHIR/Implementation%20of%20A-Star%20Algorithm%20for%20Shortest%20Path%20Logistic%20Problem.docx", forceViewer: true },
+  { name: "Eksbot_Final_Project.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%204/EksBot/Eksbot%20Final%20Project.pdf", forceViewer: true },
+  { name: "Final_Project_IoT.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%204/IoT/Final%20Project%20IoT.pdf", forceViewer: true },
+  { name: "Tugas_Makalah_Sensor.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%204/Sensor/Tugas%20Makalah.pdf", forceViewer: true },
+  { name: "Laporan_Akhir_Siskon.pdf", url: "https://drive.bica.ca/coolyeah/SMT%204/SisKon/Laporan%20Akhir%20Siskon_163231048_163231092_163221023_163231053.pdf", forceViewer: true },
+  { name: "FinalProjectSislin.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%203/SisLin/tugas%20akhir/FINAL%20PROJECT%20REPORT%20PART%202.docx", forceViewer: true }
+];
+
+(function initExplorer() {
+  const explorerFiles = document.getElementById('explorer-files');
+  const explorerStatus = document.getElementById('explorer-status');
+  if (!explorerFiles) return;
+
+  // Render icons (replace underscores with spaces for cleaner word-wrap)
+  explorerFiles.innerHTML = MY_PDFS.map((pdf, idx) => `
+    <div class="explorer-item" data-idx="${idx}" tabindex="0">
+      <img src="icons/pdf.svg" alt="PDF">
+      <span>${pdf.name.replace(/_/g, ' ')}</span>
+    </div>
+  `).join('');
+
+  if (explorerStatus) {
+    explorerStatus.textContent = `${MY_PDFS.length} object(s)`;
+  }
+
+  // Handle click/selection and double-click to open
+  const items = explorerFiles.querySelectorAll('.explorer-item');
+  let clickCount = 0;
+  let clickTimer;
+
+  function openPdf(idx) {
+    const pdf = MY_PDFS[idx];
+    const winId = `win-pdfviewer-${idx}`;
+
+    if (!document.getElementById(winId)) {
+      // Build Google Docs Wrapper if forced
+      let finalUrl = pdf.url;
+      if (pdf.forceViewer) {
+        finalUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(pdf.url)}&embedded=true`;
+      }
+
+      // Generate dynamic window HTML
+      const winHTML = `
+        <div class="win95-window" id="${winId}" style="top:${120 + (idx * 25)}px;left:${160 + (idx * 25)}px;width:600px;height:450px;" hidden>
+          <div class="win-titlebar">
+            <div class="win-title-left">
+              <img src="icons/pdf.svg" class="win-icon" alt="" />
+              <span>${pdf.name} \u2014 PDF Viewer</span>
+            </div>
+            <div class="win-controls">
+              <button class="win-btn btn-min" aria-label="Minimize">_</button>
+              <button class="win-btn btn-max" aria-label="Maximize">□</button>
+              <button class="win-btn btn-close" aria-label="Close">✕</button>
+            </div>
+          </div>
+          <div class="win-menubar">
+            <span>File</span><span>View</span><span>Help</span>
+          </div>
+          <div class="win-content" style="padding:0; overflow:hidden;">
+            <iframe src="${finalUrl}" style="width:100%; height:100%; border:none;" title="PDF Viewer"></iframe>
+          </div>
+          <div class="resize-handle"></div>
+        </div>
+      `;
+
+      // Insert directly into DOM
+      const taskbar = document.getElementById('taskbar');
+      if (taskbar) taskbar.insertAdjacentHTML('beforebegin', winHTML);
+
+      // Register dynamically into the OS
+      WINDOW_META[winId] = { title: pdf.name, icon: 'icons/pdf.svg' };
+      registerWindow(winId);
+    }
+    
+    // Open the unique window
+    openWindow(winId);
+  }
+
+  // Handle Drive Redirect logic
+  const redirectYesBtn = document.getElementById('btn-redirect-yes');
+  if (redirectYesBtn) {
+    redirectYesBtn.addEventListener('click', () => {
+      window.open('https://drive.bica.ca', '_blank');
+      closeWindow('win-redirect-warning');
+    });
+  }
+
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      // Single click selection
+      items.forEach(i => i.classList.remove('selected'));
+      item.classList.add('selected');
+
+      clickCount++;
+      if (clickCount === 1) {
+        clickTimer = setTimeout(() => { clickCount = 0; }, 400);
+      } else {
+        clearTimeout(clickTimer);
+        clickCount = 0;
+        openPdf(item.dataset.idx);
+      }
+    });
+
+    // Keyboard support
+    item.addEventListener('keydown', e => {
+      if (e.key === 'Enter') openPdf(item.dataset.idx);
+    });
+  });
+
+  // Deselect when clicking empty space
+  explorerFiles.addEventListener('click', (e) => {
+    if (!e.target.closest('.explorer-item')) {
+      items.forEach(i => i.classList.remove('selected'));
+    }
+  });
 })();
