@@ -792,8 +792,15 @@ const MY_PDFS = [
           <div class="win-menubar">
             <span>File</span><span>View</span><span>Help</span>
           </div>
+          
+          <!-- Thin Progress Bar at the top of the viewer -->
+          <div id="${winId}-loader" style="height: 4px; background: var(--btn-face); border-bottom: 1px solid var(--btn-sh); width: 100%;">
+            <div style="height: 100%; background: linear-gradient(90deg, var(--accent), #1084d0); animation: pdfLoadSweep 1.5s infinite linear;"></div>
+          </div>
+          
           <div class="win-content" style="padding:0; overflow:hidden;">
-            <iframe src="${finalUrl}" style="width:100%; height:100%; border:none;" title="PDF Viewer"></iframe>
+            <!-- Actual PDF Frame -->
+            <iframe id="${winId}-iframe" src="${finalUrl}" style="width:100%; height:100%; border:none;" title="PDF Viewer"></iframe>
           </div>
           <div class="resize-handle"></div>
         </div>
@@ -806,6 +813,22 @@ const MY_PDFS = [
       // Register dynamically into the OS
       WINDOW_META[winId] = { title: pdf.name, icon: 'icons/pdf.svg' };
       registerWindow(winId);
+
+      // Listen for the iframe completing its load
+      const iframeEl = document.getElementById(`${winId}-iframe`);
+      const loaderEl = document.getElementById(`${winId}-loader`);
+      if (iframeEl && loaderEl) {
+        iframeEl.addEventListener('load', () => {
+          loaderEl.style.display = 'none';
+        });
+
+        // failsafe hiding the loader
+        setTimeout(() => {
+          if (loaderEl.style.display !== 'none') {
+            loaderEl.style.display = 'none';
+          }
+        }, 8000);
+      }
     }
     
     // Open the unique window
