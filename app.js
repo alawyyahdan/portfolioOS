@@ -734,12 +734,12 @@ document.addEventListener('keydown', (e) => {
 const MY_PDFS = [
   { name: "MLT_Akhir_5.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%205/ML%20Teo/MLT_Akhir_5.docx.pdf", forceViewer: true },
   { name: "Project_Akhir_Computer_Vision_Kelompok_8.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%205/Comvis/Project%20Akhir%20Computer%20Vision%20Kelompok%208.pdf", forceViewer: true },
-  { name: "Implementation_of_A-Star_Algorithm_for_Shortest_Path_Logistic_Problem.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%204/AI/AI%20TUGAS%20AKHIR/Implementation%20of%20A-Star%20Algorithm%20for%20Shortest%20Path%20Logistic%20Problem.docx", forceViewer: true },
+  { name: "Implementation_of_A-Star_Algorithm_for_Shortest_Path_Logistic_Problem.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%204/AI/AI%20TUGAS%20AKHIR/Implementation%20of%20A-Star%20Algorithm%20for%20Shortest%20Path%20Logistic%20Problem.pdf", forceViewer: true },
   { name: "Eksbot_Final_Project.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%204/EksBot/Eksbot%20Final%20Project.pdf", forceViewer: true },
   { name: "Final_Project_IoT.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%204/IoT/Final%20Project%20IoT.pdf", forceViewer: true },
   { name: "Tugas_Makalah_Sensor.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%204/Sensor/Tugas%20Makalah.pdf", forceViewer: true },
   { name: "Laporan_Akhir_Siskon.pdf", url: "https://drive.bica.ca/coolyeah/SMT%204/SisKon/Laporan%20Akhir%20Siskon_163231048_163231092_163221023_163231053.pdf", forceViewer: true },
-  { name: "FinalProjectSislin.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%203/SisLin/tugas%20akhir/FINAL%20PROJECT%20REPORT%20PART%202.docx", forceViewer: true }
+  { name: "FinalProjectSislin.pdf", url: "https://drive.bica.ca/api/raw?path=/coolyeah/SMT%203/SisLin/tugas%20akhir/FINAL%20PROJECT%20REPORT%20PART%202.pdf", forceViewer: true }
 ];
 
 (function initExplorer() {
@@ -830,7 +830,7 @@ const MY_PDFS = [
         }, 8000);
       }
     }
-    
+
     // Open the unique window
     openWindow(winId);
   }
