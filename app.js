@@ -897,8 +897,8 @@ const MY_PDFS = [
     const amount = document.getElementById('donate-amount-custom').value;
     const username = document.getElementById('donate-username').value || 'AnonymousVisitor';
 
-    if (!amount || amount < 1000) {
-      showNotification('Minimum donation is Rp 1000', '⚠️ Invalid Amount');
+    if (!amount || amount < 10000) {
+      showNotification('Minimum donation is Rp 10.000', '⚠️ Invalid Amount');
       return;
     }
 
