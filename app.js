@@ -887,6 +887,9 @@ const MY_PDFS = [
   });
 
 /* ──────────────────────────────── DONATE API LOGIC ─────────────── */
+  // UBAH URL INI JIKA BACKEND DI-DEPLOY KE HOSTING/IP PUBLIC LAIN
+  const QRIS_BACKEND_URL = 'http://localhost:3010';
+
   window.currentTransactionId = null;
   window.pollInterval = null;
 
@@ -917,7 +920,7 @@ const MY_PDFS = [
     document.getElementById('donate-result').classList.remove('hidden');
     
     try {
-      const response = await fetch('http://localhost:3010/api/generate', {
+      const response = await fetch(`${QRIS_BACKEND_URL}/api/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount, player_username: username })
@@ -968,7 +971,7 @@ const MY_PDFS = [
   window.checkQRISStatus = async function(trx_id) {
     if (!trx_id) return;
     try {
-      const response = await fetch('http://localhost:3010/api/status', {
+      const response = await fetch(`${QRIS_BACKEND_URL}/api/status`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ transaction_id: trx_id })
