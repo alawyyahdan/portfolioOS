@@ -40,5 +40,16 @@ app.post('/api/status', async (req, res) => {
   }
 });
 
+app.post('/api/callback', (req, res) => {
+  const callbackData = req.body;
+  if (callbackData && callbackData.success && callbackData.data.status === 'success') {
+     console.log('✅ CALLBACK RECEIVED: Pembayaran SUCCESS untuk TRX:', callbackData.data.transaction_id);
+     // Di sini Anda bisa menambahkan proses top up coin/saldo jika menggunakan database
+     res.json({ status: "ok" });
+  } else {
+     res.json({ status: "ignored" });
+  }
+});
+
 const PORT = 3005;
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
