@@ -1,9 +1,9 @@
 module.exports = {
   apps: [
     {
-      name: "portfolio-frontend",
-      script: "./server-ui.js",
-      watch: false,
+      name: "pOS",
+      script: "serve",
+      args: "-s . -l 3005",
       env: {
         NODE_ENV: "production"
       }
