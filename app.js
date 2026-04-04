@@ -917,7 +917,7 @@ const MY_PDFS = [
     document.getElementById('donate-result').classList.remove('hidden');
     
     try {
-      const response = await fetch('http://localhost:3005/api/generate', {
+      const response = await fetch('http://localhost:3010/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount, player_username: username })
@@ -968,7 +968,7 @@ const MY_PDFS = [
   window.checkQRISStatus = async function(trx_id) {
     if (!trx_id) return;
     try {
-      const response = await fetch('http://localhost:3005/api/status', {
+      const response = await fetch('http://localhost:3010/api/status', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ transaction_id: trx_id })
