@@ -31,6 +31,7 @@
       // Open About window by default after boot
       setTimeout(() => openWindow('win-about'), 400);
       setTimeout(() => showNotification('Welcome to Portfolio OS! Double-click any icon to open.'), 1200);
+      setTimeout(() => showNotification('Love web scraping? Try our brand new tool. Just click on <strong>Scraptor</strong>!', '✨ New Tool!'), 6500);
       setTimeout(() => { bootScreen.style.display = 'none'; }, 900);
     }, 400);
   }
@@ -81,6 +82,8 @@ const WINDOW_META = {
   'win-contact': { title: 'Contact', icon: 'icons/mail.svg' },
   'win-explorer': { title: 'Documents', icon: 'icons/folder.svg' },
   'win-redirect-warning': { title: 'Warning', icon: null },
+  'win-scraptor-warning': { title: 'Warning', icon: null },
+  'win-donate': { title: 'Donate', icon: null },
   'win-notepad1': { title: 'readme.txt', icon: null },
   'win-notepad2': { title: 'notes.txt', icon: null },
   'win-notepad3': { title: 'scratch.txt', icon: null },
@@ -345,6 +348,10 @@ document.querySelectorAll('.desktop-icon').forEach(icon => {
   let clickCount = 0, clickTimer;
 
   function activate() {
+    if (icon.id === 'icon-recycle') {
+      if (typeof triggerBSOD === 'function') triggerBSOD();
+      return;
+    }
     if (icon.dataset.window) openWindow(icon.dataset.window);
   }
 
@@ -601,11 +608,15 @@ document.getElementById('btn-clear')?.addEventListener('click', () => {
 
 
 /* ──────────────────────────────── NOTIFICATION BALLOON ─────── */
-function showNotification(text) {
+function showNotification(text, title = '📬 New Message') {
   const balloon = document.getElementById('notif-balloon');
-  document.getElementById('notif-text').textContent = text;
+  const titleEl = document.getElementById('notif-title');
+  if (titleEl) titleEl.innerHTML = title;
+  document.getElementById('notif-text').innerHTML = text;
   balloon.classList.remove('hidden');
-  setTimeout(() => balloon.classList.add('hidden'), 4500);
+  
+  if (balloon.hideTimeout) clearTimeout(balloon.hideTimeout);
+  balloon.hideTimeout = setTimeout(() => balloon.classList.add('hidden'), 5000);
 }
 
 
@@ -844,6 +855,15 @@ const MY_PDFS = [
     });
   }
 
+  // Handle Scraptor Redirect logic
+  const scraptorYesBtn = document.getElementById('btn-scraptor-yes');
+  if (scraptorYesBtn) {
+    scraptorYesBtn.addEventListener('click', () => {
+      window.open('https://scraptor.bica.ca', '_blank');
+      closeWindow('win-scraptor-warning');
+    });
+  }
+
   items.forEach(item => {
     item.addEventListener('click', () => {
       // Single click selection
@@ -866,6 +886,169 @@ const MY_PDFS = [
     });
   });
 
+/* ──────────────────────────────── DONATE API LOGIC ─────────────── */
+  window.currentTransactionId = null;
+  window.pollInterval = null;
+
+  window.generateQRIS = async function() {
+    const amount = document.getElementById('donate-amount-custom').value;
+    const username = document.getElementById('donate-username').value || 'AnonymousVisitor';
+    
+    if (!amount || amount < 1000) {
+      showNotification('Minimum donation is Rp 1000', '⚠️ Invalid Amount');
+      return;
+    }
+    
+    document.getElementById('qris-image').classList.add('hidden');
+    document.getElementById('qris-image-container').classList.add('hidden');
+    document.getElementById('qris-loading-text').classList.remove('hidden');
+    document.getElementById('qris-loading-text').innerText = 'LOADING...';
+    
+    // Hide standard elements
+    const instr = document.getElementById('qris-instruction');
+    if (instr) instr.classList.add('hidden');
+    
+    const awaitEl = document.getElementById('qris-awaiting');
+    if (awaitEl) awaitEl.classList.add('hidden');
+    const chkEl = document.getElementById('qris-status-check');
+    if (chkEl) chkEl.classList.add('hidden');
+    
+    document.getElementById('donate-form').classList.add('hidden');
+    document.getElementById('donate-result').classList.remove('hidden');
+    
+    try {
+      const response = await fetch('http://localhost:3005/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount, player_username: username })
+      });
+      const resData = await response.json();
+      
+      if (resData.success && resData.data) {
+         window.currentTransactionId = resData.data.transaction_id;
+         
+         document.getElementById('qris-loading-text').classList.add('hidden');
+         
+         const img = document.getElementById('qris-image');
+         img.src = resData.data.qris_image;
+         img.classList.remove('hidden');
+         document.getElementById('qris-image-container').classList.remove('hidden');
+         
+         const awaitEl = document.getElementById('qris-awaiting');
+         if (awaitEl) awaitEl.classList.remove('hidden');
+         const chkEl = document.getElementById('qris-status-check');
+         if (chkEl) chkEl.classList.remove('hidden');
+         
+         if (window.pollInterval) clearInterval(window.pollInterval);
+         window.pollInterval = setInterval(() => {
+           checkQRISStatus(window.currentTransactionId);
+         }, 5000);
+         
+      } else {
+         throw new Error(resData.message || 'Generation failed');
+      }
+    } catch (e) {
+      document.getElementById('qris-loading-text').innerText = 'API Backend Error/Offline.';
+      console.error(e);
+      setTimeout(() => {
+         document.getElementById('qris-loading-text').classList.add('hidden');
+         const img = document.getElementById('qris-image');
+         img.src = 'icons/qris.jpg';
+         img.classList.remove('hidden');
+         document.getElementById('qris-image-container').classList.remove('hidden');
+         
+         const awaitEl = document.getElementById('qris-awaiting');
+         if (awaitEl) awaitEl.classList.remove('hidden');
+         const chkEl = document.getElementById('qris-status-check');
+         if (chkEl) chkEl.classList.remove('hidden');
+      }, 2000);
+    }
+  };
+  
+  window.checkQRISStatus = async function(trx_id) {
+    if (!trx_id) return;
+    try {
+      const response = await fetch('http://localhost:3005/api/status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ transaction_id: trx_id })
+      });
+      const resData = await response.json();
+      if (resData.success && resData.data && resData.data.status === 'success') {
+         if (window.pollInterval) {
+           clearInterval(window.pollInterval);
+           window.pollInterval = null;
+         }
+         triggerPaymentSuccess();
+      }
+    } catch (e) {
+      console.error('Polling error', e);
+    }
+  };
+
+  window.resetDonateForm = function() {
+    if (window.pollInterval) clearInterval(window.pollInterval);
+    document.getElementById('donate-result').classList.add('hidden');
+    document.getElementById('donate-form').classList.remove('hidden');
+    document.getElementById('qris-image').src = '';
+  };
+
+  window.triggerPaymentSuccess = function() {
+    if (window.pollInterval) {
+      clearInterval(window.pollInterval);
+      window.pollInterval = null;
+    }
+    
+    // Attempt closing window and resetting form
+    resetDonateForm();
+    
+    // Attempt closing window
+    const donateWin = document.getElementById('win-donate');
+    if (donateWin && !donateWin.hidden) {
+      donateWin.hidden = true;
+      document.getElementById('icon-donate').classList.remove('selected');
+    }
+    
+    showNotification('Payment verified! Get ready to party!', '🎉 Thank You');
+    
+    const partyOverlay = document.getElementById('party-overlay');
+    partyOverlay.classList.remove('hidden');
+    
+    document.body.classList.add('shake-it');
+    document.body.classList.add('rainbow-it');
+    
+    let confettiCount = 0;
+    const spawnParty = setInterval(() => {
+      // Spawn Confetti
+      const conf = document.createElement('div');
+      conf.className = 'confetti-piece';
+      conf.style.left = Math.random() * 100 + 'vw';
+      conf.style.background = ['#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f'][Math.floor(Math.random() * 6)];
+      partyOverlay.appendChild(conf);
+      
+      // Spawn Balloons sporadically
+      if (Math.random() > 0.6) {
+         const bal = document.createElement('div');
+         bal.className = 'balloon-piece';
+         bal.style.left = Math.random() * 90 + 'vw';
+         bal.style.background = ['#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f'][Math.floor(Math.random() * 6)];
+         partyOverlay.appendChild(bal);
+         setTimeout(() => { if(bal.parentNode) bal.parentNode.removeChild(bal); }, 5000);
+      }
+      
+      confettiCount++;
+      if (confettiCount > 60) clearInterval(spawnParty);
+      setTimeout(() => { if(conf.parentNode) conf.parentNode.removeChild(conf); }, 3000);
+    }, 50);
+    
+    setTimeout(() => {
+       partyOverlay.classList.add('hidden');
+       document.body.classList.remove('shake-it');
+       document.body.classList.remove('rainbow-it');
+       partyOverlay.innerHTML = '<div class="party-text">THANK YOU FOR YOUR DONATION!<br><span style="font-size:4vmax; color:white; text-shadow:2px 2px 0 #000;">YOU ARE AWESOME!</span></div>';
+    }, 5000);
+  };
+
   // Deselect when clicking empty space
   explorerFiles.addEventListener('click', (e) => {
     if (!e.target.closest('.explorer-item')) {
@@ -873,3 +1056,45 @@ const MY_PDFS = [
     }
   });
 })();
+
+/* ──────────────────────────────── EASTER EGG (BSOD) ─────────── */
+let keyBuffer = '';
+document.addEventListener('keydown', (e) => {
+  if (e.key && e.key.length === 1) {
+    keyBuffer += e.key.toLowerCase();
+    if (keyBuffer.length > 4) keyBuffer = keyBuffer.slice(1);
+    // Secret code: typing 'bsod'
+    if (keyBuffer === 'bsod') {
+      triggerBSOD();
+    }
+  }
+});
+
+let bsodActive = false;
+function triggerBSOD() {
+  if (bsodActive) return;
+  bsodActive = true;
+  const bsodScreen = document.getElementById('bsod-screen');
+  if (bsodScreen) bsodScreen.classList.remove('hidden');
+  
+  const desk = document.getElementById('desktop');
+  if (desk) desk.style.pointerEvents = 'none';
+  
+  setTimeout(() => {
+    const rebootKeyHandler = (e) => {
+      e.preventDefault();
+      document.removeEventListener('keydown', rebootKeyHandler);
+      document.removeEventListener('click', rebootKeyHandler);
+      document.removeEventListener('touchstart', rebootKeyHandler);
+      
+      if (bsodScreen) bsodScreen.classList.add('hidden');
+      bsodActive = false;
+      if (desk) desk.style.pointerEvents = '';
+      
+      if (typeof showShutdown === 'function') showShutdown();
+    };
+    document.addEventListener('keydown', rebootKeyHandler);
+    document.addEventListener('click', rebootKeyHandler);
+    document.addEventListener('touchstart', rebootKeyHandler, { once: true });
+  }, 1000);
+}
