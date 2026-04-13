@@ -864,6 +864,24 @@ const MY_PDFS = [
     });
   }
 
+  // Handle TEEP Redirect logic
+  const teepYesBtn = document.getElementById('btn-teep-yes');
+  if (teepYesBtn) {
+    teepYesBtn.addEventListener('click', () => {
+      window.open('https://teep.bica.ca', '_blank');
+      closeWindow('win-teep-warning');
+    });
+  }
+
+  // Handle AIPrep Redirect logic
+  const aiprepYesBtn = document.getElementById('btn-aiprep-yes');
+  if (aiprepYesBtn) {
+    aiprepYesBtn.addEventListener('click', () => {
+      window.open('https://aiprep.bica.ca', '_blank');
+      closeWindow('win-aiprep-warning');
+    });
+  }
+
   items.forEach(item => {
     item.addEventListener('click', () => {
       // Single click selection

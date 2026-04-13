@@ -1,0 +1,46 @@
+# Syahdan Hayyan Alawy - Robotics & AI Engineering Portfolio
+
+> Welcome to the official portfolio of Syahdan Hayyan Alawy (adan). I build things at the intersection of hardware and software — from autonomous robots to AI-powered dashboards.
+
+## About Me
+- **Role**: Robotics & AI Engineering Student @ Universitas Airlangga (UNAIR)
+- **Skills**: Python, C/C++, HTML/CSS/JS, ROS / ROS 2, Computer Vision, Machine Learning, IoT (ESP32), Gazebo Sim.
+- **Background**: Passionate about embedded systems, machine learning, and automation. Currently looking for new challenges in robotics and AI.
+
+## My Projects & Systems
+
+### TEEP Scholarship Portal
+- **Link**: https://teep.bica.ca
+- **Description**: Platform for finding TEEP (Taiwan Experience Education Program) scholarships and university programs.
+
+### AIPrep Learning System
+- **Link**: https://aiprep.bica.ca
+- **Description**: AI-powered study platform generating summaries, podcasts, flashcards, and interactive modules from raw context.
+
+### Scraptor
+- **Link**: https://scraptor.bica.ca
+- **Description**: Meso-scale Data Scraper Service.
+
+### Solar Panel Tracker
+- **Link**: https://spanel.bica.ca
+- **Description**: ESP32 embedded firmware with MQTT communication for real-time monitoring of solar panel orientation and weather sensor data.
+
+### ESP32-Cam Stream
+- **Link**: https://cam.bica.ca
+- **Description**: Multi-user streaming platform with secure API key authentication and real-time video streaming.
+
+### Pallet AMR Simulator
+- **Description**: Simulation of a pallet autonomous mobile robot with dual fork-lift in ROS 2 and Gazebo, including Nav2 navigation stack.
+
+### Loan Default Prediction
+- **Description**: Built a prediction model using CatBoost + SHAP. Used SHAP to highlight main risk drivers like loan-to-income ratio and interest rate.
+
+### A* Pathfinder
+- **Link**: https://astar.bica.ca
+- **Description**: Interactive map simulation using the A* algorithm for finding the shortest delivery route between cities in East Java.
+
+## Contact & Public Links
+- **GitHub**: https://github.com/alawyyahdan
+- **LinkedIn**: https://www.linkedin.com/in/alawyyahdan
+- **Public Drive**: https://drive.bica.ca
+- **Email**: syahdan.hayyan.alawy-2023@ftmm.unair.ac.id

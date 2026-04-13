@@ -5,15 +5,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>call me adan!</title>
-  <meta name="description" content="I am telling you all my secrets here! Come on, open up!" />
+  <meta name="description"
+    content="gotcha! need to know more abt me? click here!" />
   <meta name="author" content="Syahdan Hayyan Alawy" />
   <meta name="keywords"
-    content="Syahdan Hayyan Alawy, Robotics, AI, Engineering, Portfolio, UNAIR, ESP32, ROS2, Machine Learning, IoT" />
+    content="Syahdan Hayyan Alawy, adan, Portfolio, Robotics, AI, Machine Learning, IoT, Web Dashboard, TEEP Taiwan Scholarship, AIPrep, Universitas Airlangga, ROS2" />
 
   <!-- Open Graph (Facebook, WhatsApp, Discord, LinkedIn, Telegram) -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="adan official portfolio portal!" />
-  <meta property="og:description" content="I am telling you all my secrets here! Come on, open up!" />
+  <meta property="og:title" content="adan" />
+  <meta property="og:description"
+    content="gotcha! need to know more abt me? click here!" />
   <meta property="og:image" content="icons/profile.png" />
   <meta property="og:image:width" content="800" />
   <meta property="og:image:height" content="800" />
@@ -24,10 +26,62 @@
 
   <!-- Twitter / X Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="adan official portfolio portal!" />
-  <meta name="twitter:description" content="I am telling you all my secrets here! Come on, open up!" />
+  <meta name="twitter:title" content="adan" />
+  <meta name="twitter:description"
+    content="gotcha! need to know more abt me? click here!" />
   <meta name="twitter:image" content="icons/profile.png" />
   <meta name="twitter:image:alt" content="Syahdan Hayyan Alawy" />
+
+  <!-- JSON-LD Structured Data for Search Engine Sitelinks -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Syahdan Hayyan Alawy",
+    "url": "https://bica.ca",
+    "jobTitle": "Robotics & AI Engineer",
+    "sameAs": [
+      "https://github.com/alawyyahdan",
+      "https://www.linkedin.com/in/alawyyahdan"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "SiteNavigationElement",
+        "position": 1,
+        "name": "TEEP Scholarship Search",
+        "description": "Find ur own scholarship opportunity on Taiwan here!",
+        "url": "https://teep.bica.ca"
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 2,
+        "name": "AIPrep Learn",
+        "description": "Learn with AI to not get bored.",
+        "url": "https://aiprep.bica.ca"
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 3,
+        "name": "Scraptor Data Tools",
+        "description": "Use my tools to scrape data from the web.",
+        "url": "https://scraptor.bica.ca"
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "position": 4,
+        "name": "Public Drive",
+        "description": "My public drive to store my secret.",
+        "url": "https://drive.bica.ca"
+      }
+    ]
+  }
+  </script>
 
   <!-- Canonical -->
   <link rel="canonical" href="https://bica.ca" />
@@ -41,6 +95,29 @@
 </head>
 
 <body>
+
+  <!-- SEO & accessibility: main subs & external links -->
+  <nav class="sr-only" aria-label="Main Site Links">
+    <ul>
+      <li><a href="https://teep.bica.ca" title="TEEP & university program search">TEEP Scholarship Portal</a>
+        — Find TEEP programs and scholarships in one place.</li>
+      <li><a href="https://aiprep.bica.ca" title="AI learning: modules, notes, podcasts">AIPrep</a> — Level up your study game with an AI copilot.</li>
+      <li><a href="https://scraptor.bica.ca" title="Data scraping tools">Scraptor</a> — Web scraping at scale, basically
+        on autopilot.</li>
+      <li><a href="https://drive.bica.ca" title="Project archive & public files">Public Drive</a> — Project stash and
+        public docs.</li>
+      <li><a href="https://spanel.bica.ca" title="Solar panel monitoring">Solar Panel Tracker</a> — Check your solar
+        setup from anywhere (IoT).</li>
+      <li><a href="https://cam.bica.ca" title="ESP32 camera stream">ESP32-Cam</a> — Make ur ESP32 Live.
+      </li>
+      <li><a href="https://astar.bica.ca" title="A* logistics route simulation">A* Map Project</a> — Route logistics
+        smarter with optimal pathfinding.</li>
+      <li><a href="https://github.com/alawyyahdan" title="GitHub portfolio">GitHub Profile</a> — Open-source repos and
+        side projects.</li>
+      <li><a href="https://www.linkedin.com/in/alawyyahdan" title="LinkedIn profile">LinkedIn</a> — Work history and
+        education.</li>
+    </ul>
+  </nav>
 
   <!-- ═══════════════════════════════════════════ MOBILE WALL ═══ -->
   <div id="mobile-wall">
@@ -114,15 +191,13 @@
       <img src="icons/recycle.svg" alt="" />
       <span>Recycle Bin</span>
     </div>
-    <div class="desktop-icon icon-free" id="icon-documents" data-window="win-explorer"
-      tabindex="0" role="button" aria-label="Open Documents"
-      style="position:absolute;top:16px;left:106px;">
+    <div class="desktop-icon icon-free" id="icon-documents" data-window="win-explorer" tabindex="0" role="button"
+      aria-label="Open Documents" style="position:absolute;top:16px;left:106px;">
       <img src="icons/folder.svg" alt="" />
       <span>Documents</span>
     </div>
-    <div class="desktop-icon icon-free" id="icon-drive" data-window="win-redirect-warning"
-      tabindex="0" role="button" aria-label="Open Drive"
-      style="position:absolute;top:110px;left:106px;">
+    <div class="desktop-icon icon-free" id="icon-drive" data-window="win-redirect-warning" tabindex="0" role="button"
+      aria-label="Open Drive" style="position:absolute;top:110px;left:106px;">
       <img src="icons/drive.svg" alt="" />
       <span>Drive</span>
     </div>
@@ -146,8 +221,21 @@
       <img src="icons/drive.svg" alt="" />
       <span>Scraptor</span>
     </div>
-    <div class="desktop-icon icon-free" id="icon-donate" data-window="win-donate" tabindex="0" role="button" aria-label="Donate" style="position:absolute;top:110px;left:196px;">
-      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='12' fill='%23ffd700' stroke='%23000' stroke-width='2'/><circle cx='16' cy='16' r='8' fill='none' stroke='%23daa520' stroke-width='2'/><text x='16' y='21' font-family='monospace' font-size='14' font-weight='bold' fill='%23000' text-anchor='middle'>$</text></svg>" alt="" />
+    <div class="desktop-icon icon-free" id="icon-teep" data-window="win-teep-warning" tabindex="0" role="button"
+      aria-label="Open TEEP" style="position:absolute;top:110px;left:196px;">
+      <img src="icons/drive.svg" alt="" />
+      <span>TEEP</span>
+    </div>
+    <div class="desktop-icon icon-free" id="icon-aiprep" data-window="win-aiprep-warning" tabindex="0" role="button"
+      aria-label="Open AIPrep" style="position:absolute;top:204px;left:196px;">
+      <img src="icons/skills.svg" alt="" />
+      <span>AIPrep</span>
+    </div>
+    <div class="desktop-icon icon-free" id="icon-donate" data-window="win-donate" tabindex="0" role="button"
+      aria-label="Donate" style="position:absolute;top:298px;left:196px;">
+      <img
+        src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='12' fill='%23ffd700' stroke='%23000' stroke-width='2'/><circle cx='16' cy='16' r='8' fill='none' stroke='%23daa520' stroke-width='2'/><text x='16' y='21' font-family='monospace' font-size='14' font-weight='bold' fill='%23000' text-anchor='middle'>$</text></svg>"
+        alt="" />
       <span>Donate</span>
     </div>
 
@@ -647,7 +735,8 @@ qos         : 0 or 1 should be fine
     </div>
 
     <!-- ─── WINDOW: Redirect Warning ─── -->
-    <div class="win95-window" id="win-redirect-warning" style="top:250px;left:auto;right:auto;width:340px;height:auto;" hidden>
+    <div class="win95-window" id="win-redirect-warning" style="top:250px;left:auto;right:auto;width:340px;height:auto;"
+      hidden>
       <div class="win-titlebar">
         <div class="win-title-left">
           <span>⚠️ Warning</span>
@@ -664,13 +753,15 @@ qos         : 0 or 1 should be fine
         </p>
         <div style="display: flex; gap: 12px; justify-content: center;">
           <button class="win95-btn" id="btn-redirect-yes" style="width: 80px; font-weight: bold;">Yes</button>
-          <button class="win95-btn" id="btn-redirect-no" style="width: 80px;" onclick="closeWindow('win-redirect-warning')">No</button>
+          <button class="win95-btn" id="btn-redirect-no" style="width: 80px;"
+            onclick="closeWindow('win-redirect-warning')">No</button>
         </div>
       </div>
     </div>
 
     <!-- ─── WINDOW: Scraptor Warning ─── -->
-    <div class="win95-window" id="win-scraptor-warning" style="top:270px;left:auto;right:auto;width:340px;height:auto;" hidden>
+    <div class="win95-window" id="win-scraptor-warning" style="top:270px;left:auto;right:auto;width:340px;height:auto;"
+      hidden>
       <div class="win-titlebar">
         <div class="win-title-left">
           <span>⚠️ Warning</span>
@@ -688,6 +779,54 @@ qos         : 0 or 1 should be fine
         <div style="display: flex; gap: 12px; justify-content: center;">
           <button class="win95-btn" id="btn-scraptor-yes" style="width: 80px; font-weight: bold;">Yes</button>
           <button class="win95-btn" style="width: 80px;" onclick="closeWindow('win-scraptor-warning')">No</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── WINDOW: TEEP Warning ─── -->
+    <div class="win95-window" id="win-teep-warning" style="top:270px;left:auto;right:auto;width:340px;height:auto;"
+      hidden>
+      <div class="win-titlebar">
+        <div class="win-title-left">
+          <span>⚠️ Warning</span>
+        </div>
+        <div class="win-controls">
+          <button class="win-btn btn-close" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-content" style="padding: 20px; text-align: center; background: var(--win-bg);">
+        <p style="margin-bottom: 24px; font-size: 14px; line-height: 1.4;">
+          You are about to be redirected to:<br>
+          <strong style="color: blue;">https://teep.bica.ca</strong><br><br>
+          Do you want to continue?
+        </p>
+        <div style="display: flex; gap: 12px; justify-content: center;">
+          <button class="win95-btn" id="btn-teep-yes" style="width: 80px; font-weight: bold;">Yes</button>
+          <button class="win95-btn" style="width: 80px;" onclick="closeWindow('win-teep-warning')">No</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── WINDOW: AIPrep Warning ─── -->
+    <div class="win95-window" id="win-aiprep-warning" style="top:270px;left:auto;right:auto;width:340px;height:auto;"
+      hidden>
+      <div class="win-titlebar">
+        <div class="win-title-left">
+          <span>⚠️ Warning</span>
+        </div>
+        <div class="win-controls">
+          <button class="win-btn btn-close" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-content" style="padding: 20px; text-align: center; background: var(--win-bg);">
+        <p style="margin-bottom: 24px; font-size: 14px; line-height: 1.4;">
+          You are about to be redirected to:<br>
+          <strong style="color: blue;">https://aiprep.bica.ca</strong><br><br>
+          Do you want to continue?
+        </p>
+        <div style="display: flex; gap: 12px; justify-content: center;">
+          <button class="win95-btn" id="btn-aiprep-yes" style="width: 80px; font-weight: bold;">Yes</button>
+          <button class="win95-btn" style="width: 80px;" onclick="closeWindow('win-aiprep-warning')">No</button>
         </div>
       </div>
     </div>
@@ -711,43 +850,57 @@ qos         : 0 or 1 should be fine
         <!-- Arcade Form Area -->
         <div id="donate-form" style="display:flex; flex-direction:column; gap:15px;">
           <p class="arcade-title blink">INSERT COIN TO CONTINUE</p>
-          
+
           <div style="text-align:center;">
-             <p style="color:#0ff; font-weight:bold; margin-bottom:10px; font-size:16px; font-family:'Courier New', monospace;">SELECT CREDIT PACK:</p>
-             <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:10px;">
-                <button class="arcade-btn green-btn" onclick="document.getElementById('donate-amount-custom').value=5000">1UP (Rp 5k)</button>
-                <button class="arcade-btn yellow-btn" onclick="document.getElementById('donate-amount-custom').value=50000">10UP (Rp 50k)</button>
-                <button class="arcade-btn pink-btn" onclick="document.getElementById('donate-amount-custom').value=100000">MAX (Rp 100k)</button>
-             </div>
+            <p
+              style="color:#0ff; font-weight:bold; margin-bottom:10px; font-size:16px; font-family:'Courier New', monospace;">
+              SELECT CREDIT PACK:</p>
+            <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:10px;">
+              <button class="arcade-btn green-btn"
+                onclick="document.getElementById('donate-amount-custom').value=5000">1UP (Rp 5k)</button>
+              <button class="arcade-btn yellow-btn"
+                onclick="document.getElementById('donate-amount-custom').value=50000">10UP (Rp 50k)</button>
+              <button class="arcade-btn pink-btn"
+                onclick="document.getElementById('donate-amount-custom').value=100000">MAX (Rp 100k)</button>
+            </div>
           </div>
-          
+
           <div style="background:#222; border:2px dashed #0ff; padding:10px; text-align:center;">
-            <label for="donate-amount-custom" style="color:#fff; font-family:'Courier New', monospace;">CUSTOM VALUE:</label><br>
-            <input type="number" id="donate-amount-custom" class="arcade-input" placeholder="Rp" style="margin-top:5px;">
+            <label for="donate-amount-custom" style="color:#fff; font-family:'Courier New', monospace;">CUSTOM
+              VALUE:</label><br>
+            <input type="number" id="donate-amount-custom" class="arcade-input" placeholder="Rp"
+              style="margin-top:5px;">
           </div>
-          
+
           <div style="background:#222; border:2px dashed #f0f; padding:10px; text-align:center;">
-            <label for="donate-username" style="color:#fff; font-family:'Courier New', monospace;">PLAYER NAME:</label><br>
+            <label for="donate-username" style="color:#fff; font-family:'Courier New', monospace;">PLAYER
+              NAME:</label><br>
             <input type="text" id="donate-username" class="arcade-input" placeholder="PLAYER1" style="margin-top:5px;">
           </div>
-          
+
           <div style="display:flex; gap:10px; margin-top:5px;">
-            <button class="arcade-btn flash-btn" id="btn-generate-qris" style="flex:2;" onclick="generateQRIS()">START (QRIS)</button>
-            <button class="arcade-btn blue-btn" style="flex:1;" onclick="window.open('https://paypal.me/alawyyahdan', '_blank')">PAYPAL</button>
+            <button class="arcade-btn flash-btn" id="btn-generate-qris" style="flex:2;" onclick="generateQRIS()">START
+              (QRIS)</button>
+            <button class="arcade-btn blue-btn" style="flex:1;"
+              onclick="window.open('https://paypal.me/alawyyahdan', '_blank')">PAYPAL</button>
           </div>
         </div>
 
         <!-- Result Area (Wait Mode) -->
-        <div id="donate-result" class="hidden" style="text-align:center; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <div id="donate-result" class="hidden"
+          style="text-align:center; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center;">
           <p id="qris-loading-text" class="arcade-title blink" style="color:#ff0; font-size:24px;">LOADING...</p>
-          
-          <div id="qris-image-container" class="hidden" style="border:4px solid #fff; padding:5px; background:#fff; box-shadow: 0 0 15px #fff; max-width:80%; margin: 10px auto;">
-             <img id="qris-image" style="width:100%; height:auto; display:block;" src="" alt="QRIS">
+
+          <div id="qris-image-container" class="hidden"
+            style="border:4px solid #fff; padding:5px; background:#fff; box-shadow: 0 0 15px #fff; max-width:80%; margin: 10px auto;">
+            <img id="qris-image" style="width:100%; height:auto; display:block;" src="" alt="QRIS">
           </div>
-          
-          <p id="qris-awaiting" class="hidden arcade-text" style="color:#0ff; margin-top:20px; font-size:18px;">SCAN WITH ANY E-WALLET</p>
-          <p id="qris-status-check" class="hidden arcade-text blink" style="color:#f0f; margin-top:10px; font-size:14px;">AWAITING SIGNAL...</p>
-          
+
+          <p id="qris-awaiting" class="hidden arcade-text" style="color:#0ff; margin-top:20px; font-size:18px;">SCAN
+            WITH ANY E-WALLET</p>
+          <p id="qris-status-check" class="hidden arcade-text blink"
+            style="color:#f0f; margin-top:10px; font-size:14px;">AWAITING SIGNAL...</p>
+
           <button class="arcade-btn red-btn" style="margin-top:20px;" onclick="resetDonateForm()">ABORT</button>
         </div>
       </div>
@@ -783,6 +936,8 @@ qos         : 0 or 1 should be fine
         <li data-window="win-notepad1"> <span>📝</span> readme.txt</li>
         <li data-window="win-notepad2"> <span>📝</span> notes.txt</li>
         <li data-window="win-notepad3"> <span>📝</span> scratch.txt</li>
+        <li data-window="win-teep-warning"> <span>🌐</span> TEEP</li>
+        <li data-window="win-aiprep-warning"> <span>🌐</span> AIPrep</li>
         <li class="start-sep"></li>
         <li id="start-error"> <span>⛔</span> Crash Test</li>
         <li id="start-shutdown"> <span>🔴</span> Shut Down…</li>
@@ -795,10 +950,12 @@ qos         : 0 or 1 should be fine
   <div id="bsod-screen" class="hidden">
     <div class="bsod-text">
       <span class="bsod-badge">Windows</span>
-      <p>A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36. The current application will be terminated.</p>
+      <p>A fatal exception 0E has occurred at 0028:C0011E36 in VXD VMM(01) + 00010E36. The current application will be
+        terminated.</p>
       <br>
-      <p>*  Press any key to terminate the current application.</p>
-      <p>*  Press CTRL+ALT+DEL again to restart your computer. You will lose any unsaved information in all applications.</p>
+      <p>* Press any key to terminate the current application.</p>
+      <p>* Press CTRL+ALT+DEL again to restart your computer. You will lose any unsaved information in all applications.
+      </p>
       <br>
       <p style="text-align: center;">Press any key to continue <span class="blink">_</span></p>
     </div>
@@ -812,9 +969,11 @@ qos         : 0 or 1 should be fine
 
   <!-- ─── Party Mode Overlay ─── -->
   <div id="party-overlay" class="hidden">
-    <div class="party-text">THANK YOU FOR YOUR DONATION!<br><span style="font-size:4vmax; color:white; text-shadow:2px 2px 0 #000;">YOU ARE AWESOME!</span></div>
+    <div class="party-text">THANK YOU FOR YOUR DONATION!<br><span
+        style="font-size:4vmax; color:white; text-shadow:2px 2px 0 #000;">YOU ARE AWESOME!</span></div>
   </div>
 
   <script src="app.js?v=4"></script>
 </body>
+
 </html>
