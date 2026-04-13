@@ -31,7 +31,7 @@
       // Open About window by default after boot
       setTimeout(() => openWindow('win-about'), 400);
       setTimeout(() => showNotification('Welcome to Portfolio OS! Double-click any icon to open.'), 1200);
-      setTimeout(() => showNotification('Love web scraping? Try our brand new tool. Just click on <strong>Scraptor</strong>!', '✨ New Tool!'), 6500);
+      setTimeout(() => showNotification('New on <strong>AIPrep</strong>: upload your module and get podcasts, summaries, quizzes & more — study that doesn’t put you to sleep. Double-click the <strong>AIPrep</strong> icon!', '✨ New on AIPrep'), 6500);
       setTimeout(() => { bootScreen.style.display = 'none'; }, 900);
     }, 400);
   }
